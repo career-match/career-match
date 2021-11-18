@@ -5,12 +5,14 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Company } from '../../api/company/Company';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  companyName: String,
+  company: String,
+  address: String,
   description: String,
+  image: String,
   condition: {
     type: String,
     allowedValues: ['css', 'design', 'html', 'ia', 'javascript', 'meteor', 'node', 'python', 'react', 'ruby', 'ui'],
@@ -25,9 +27,9 @@ class AddCompany extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { name, description, condition } = data;
+    const { company, address, description, condition, image } = data;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert({ name, description, condition, owner },
+    Company.collection.insert({ company, address, description, condition, image, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -47,7 +49,9 @@ class AddCompany extends React.Component {
           <Header as="h2" textAlign="center">Add Company</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <TextField name='name'/>
+              <TextField name='company'/>
+              <TextField name='address'/>
+              <TextField name='image'/>
               <LongTextField name='description'/>
               <SelectField name='condition'/>
               <SubmitField value='Submit'/>

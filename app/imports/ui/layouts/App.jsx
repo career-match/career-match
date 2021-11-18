@@ -18,6 +18,7 @@ import SearchPage from '../pages/SearchPage';
 import AdminHome from '../pages/AdminHome';
 import StudentHome from '../pages/StudentHome';
 import CompanyHome from '../pages/CompanyHome';
+import AddCompany from '../pages/AddCompany';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -36,6 +37,7 @@ class App extends React.Component {
             <Route path="/company" component={CompanyHome}/>
             <ProtectedRoute path="/companies" component={ListCompanies}/>
             <ProtectedRoute path="/students" component={ListStudents}/>
+            <ProtectedRoute path="/addcompanies" component={AddCompany}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
             <Route component={NotFound}/>
