@@ -8,6 +8,11 @@
     {
       "email": "john@foo.com",
       "password": "changeme"
+    },
+    {
+      "email": "recruiter@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
     }
   ],
   "defaultData": [
@@ -40,10 +45,20 @@
     {
       "company": "Apple",
       "address": "One Apple Park Way, Cupertino, CA 95014",
+      "phone": "(800)692–7753",
       "condition": "css",
       "description": "Apple Inc. designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services. The Companies products\n              include iPhone, Mac, iPad, and Wearables, Home and Accessories. iPhone is the Companies line of smartphones based on its iOS operating system",
       "image": "https://yt3.ggpht.com/ytc/AKedOLQR6CdQxBvU0Ye8hUpCyMc6HMwoMivl_vad_YmjZg=s900-c-k-c0x00ffffff-no-rj",
-      "owner": "john@foo.com"
+      "owner": "recruiter@foo.com"
+    },
+    {
+      "company": "Intel",
+      "address": "2200 Mission College Blvd., Santa Clara, CA",
+      "phone": "(408)765-8080",
+      "condition": "design",
+      "description": "We create world-changing technology that improves the life of every person on the planet. We are inspired to: Drive innovation that makes the world safer, builds healthy and vibrant communities, and increases productivity. We have big ambitions, and a growing sense of urgency to work with others and address world challenges no one can tackle alone.",
+      "image": "https://images.idgesg.net/images/article/2019/01/intel-logo-100786098-large.jpg",
+      "owner": "recruiter@foo.com"
     }
   ]
 }

@@ -18,7 +18,7 @@ class ListCompanies extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center" inverted>List Companies</Header>
+        <Header as="h2" textAlign="center">List Companies</Header>
         <Card.Group centered>
           {this.props.companies.map((company, index) => <CompanyItem
             key={index}

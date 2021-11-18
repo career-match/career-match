@@ -12,6 +12,7 @@ const formSchema = new SimpleSchema({
   company: String,
   address: String,
   description: String,
+  phone: String,
   image: String,
   condition: {
     type: String,
@@ -27,9 +28,9 @@ class AddCompany extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { company, address, description, condition, image } = data;
+    const { company, address, phone, description, condition, image } = data;
     const owner = Meteor.user().username;
-    Company.collection.insert({ company, address, description, condition, image, owner },
+    Company.collection.insert({ company, address, phone, description, condition, image, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -51,6 +52,7 @@ class AddCompany extends React.Component {
             <Segment>
               <TextField name='company'/>
               <TextField name='address'/>
+              <TextField name='phone'/>
               <TextField name='image'/>
               <LongTextField name='description'/>
               <SelectField name='condition'/>

@@ -10,8 +10,8 @@ class Company extends React.Component {
       <Card>
         <Card.Content>
           <Image
-            floated='right'
-            size='mini'
+            floated='center'
+            size='medium'
             src={this.props.companies.image}
           />
           <Card.Header>{this.props.companies.company}</Card.Header>

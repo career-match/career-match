@@ -15,6 +15,7 @@ class CompanyCollection {
     this.schema = new SimpleSchema({
       company: String,
       address: String,
+      phone: String,
       description: String,
       image: String,
       owner: String,

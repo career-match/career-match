@@ -10,15 +10,19 @@ class CompanyItem extends React.Component {
       <Card>
         <Card.Content>
           <Image
-            floated='right'
-            size='mini'
+            floated='left'
+            size='small'
             src={this.props.company.image}
           />
           <Card.Header>{this.props.company.company}</Card.Header>
           <Card.Meta>{this.props.company.address}</Card.Meta>
+          <Card.Meta>{this.props.company.phone}</Card.Meta>
           <Card.Description>
             {this.props.company.description}
           </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <p>Looking for students who are experienced in: {this.props.company.condition}</p>
         </Card.Content>
         <Card.Content extra>
           <Link to={`/edit/${this.props.company._id}`}>Edit</Link>
