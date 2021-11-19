@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Card, Header, Loader, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Profiles } from '../../api/profile/Profile';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListCompanies extends React.Component {
@@ -40,20 +40,20 @@ class ListCompanies extends React.Component {
 
 // Require an array of Stuff documents in the props.
 ListCompanies.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+  profiles: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  const subscription = Meteor.subscribe(Profiles.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
-  // Get the Stuff documents
-  const stuffs = Stuffs.collection.find({}).fetch();
+  // Get the Profile documents
+  const profiles = Profiles.collection.find({}).fetch();
   return {
-    stuffs,
+    profiles,
     ready,
   };
 })(ListCompanies);
