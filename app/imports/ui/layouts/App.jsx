@@ -28,15 +28,15 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route exact path="/" component={Landing}/>
-            <Route path="/student" component={StudentHome}/>
             <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route path="/searchpage" component={SearchPage}/>
-            <Route path="/company" component={CompanyHome}/>
-            <ProtectedRoute path="/companies" component={ListCompanies}/>
-            <ProtectedRoute path="/students" component={ListStudents}/>
+            <Route path="/companies" component={ListCompanies}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
+            <StudentProtectedRoute path="/student" component={StudentHome}/>
+            <CompanyProtectedRoute path="/company" component={CompanyHome}/>
+            <CompanyProtectedRoute path="/students" component={ListStudents}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
             <Route component={NotFound}/>
           </Switch>
@@ -58,6 +58,48 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
     render={(props) => {
       const isLogged = Meteor.userId() !== null;
       return isLogged ?
+        (<Component {...props} />) :
+        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
+        );
+    }}
+  />
+);
+
+/**
+ * StudentProtectedRoute (see React Router v4 sample)
+ * Checks for Meteor login and student role before routing to the requested page, otherwise goes to signin page.
+ * Admin is also allowed access.
+ * @param {any} { component: Component, ...rest }
+ */
+const StudentProtectedRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => {
+      const isLogged = Meteor.userId() !== null;
+      const isStudent = Roles.userIsInRole(Meteor.userId(), 'student');
+      const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+      return (isLogged && (isStudent || isAdmin)) ?
+        (<Component {...props} />) :
+        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
+        );
+    }}
+  />
+);
+
+/**
+ * CompanyProtectedRoute (see React Router v4 sample)
+ * Checks for Meteor login and student role before routing to the requested page, otherwise goes to signin page.
+ * Admin is also allowed access.
+ * @param {any} { component: Component, ...rest }
+ */
+const CompanyProtectedRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => {
+      const isLogged = Meteor.userId() !== null;
+      const isCompany = Roles.userIsInRole(Meteor.userId(), 'company');
+      const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+      return (isLogged && (isCompany || isAdmin)) ?
         (<Component {...props} />) :
         (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
         );
