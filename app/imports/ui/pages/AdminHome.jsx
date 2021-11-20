@@ -5,7 +5,7 @@ import { Button, Grid } from 'semantic-ui-react';
 class Landing extends React.Component {
   render() {
     return (
-      <Grid textAlign='center' relaxed container>
+      <Grid id="admin-home-page" textAlign='center' relaxed container>
         <Grid.Row>
           <h1>Welcome to Career Match</h1>
         </Grid.Row>

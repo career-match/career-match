@@ -19,7 +19,7 @@ const options = [
 class Search extends React.Component {
   render() {
     return (
-      <Grid textAlign='center' relaxed container>
+      <Grid id="search-page" textAlign='center' relaxed container>
         <Grid.Row>
           <h1>Career Match</h1>
         </Grid.Row>
