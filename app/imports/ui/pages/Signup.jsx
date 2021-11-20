@@ -11,7 +11,7 @@ class Signup extends React.Component {
   /* Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', error: '', redirectToReferer: false };
+    this.state = { email: '', password: '', role: 'student', error: '', redirectToReferer: false };
   }
 
   /* Update the form controls each time the user interacts with them. */
@@ -33,6 +33,7 @@ class Signup extends React.Component {
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
   render() {
+    const { role } = this.state;
     const { from } = this.props.location.state || { from: { pathname: '/add' } };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
@@ -67,6 +68,23 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
+                <Form.Group inline>
+                  <label>Role</label>
+                  <Form.Radio
+                    label='Student'
+                    name='role'
+                    value='student'
+                    checked={role === 'student'}
+                    onChange={this.handleChange}
+                  />
+                  <Form.Radio
+                    label='Company'
+                    name='role'
+                    value='company'
+                    checked={role === 'company'}
+                    onChange={this.handleChange}
+                  />
+                </Form.Group>
                 <Form.Button id="signup-form-submit" content="Submit"/>
               </Segment>
             </Form>

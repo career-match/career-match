@@ -9,12 +9,11 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListCompanies from '../pages/ListCompanies';
 import ListStudents from '../pages/ListStudents';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
-import SearchPage from '../pages/SearchPage';
+import Search from '../pages/Search';
 import AdminHome from '../pages/AdminHome';
 import StudentHome from '../pages/StudentHome';
 import CompanyHome from '../pages/CompanyHome';
@@ -27,16 +26,15 @@ class App extends React.Component {
         <div>
           <NavBar/>
           <Switch>
-            <Route exact path="/" component={Landing}/>
-            <Route path="/student" component={StudentHome}/>
+            <HomeRoute exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
-            <Route path="/searchpage" component={SearchPage}/>
-            <Route path="/company" component={CompanyHome}/>
-            <ProtectedRoute path="/companies" component={ListCompanies}/>
-            <ProtectedRoute path="/students" component={ListStudents}/>
-            <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
+            <Route path="/search" component={Search}/>
+            <Route path="/companies" component={ListCompanies}/>
+            <StudentProtectedRoute path="/student" component={StudentHome}/>
+            <CompanyProtectedRoute path="/company" component={CompanyHome}/>
+            <CompanyProtectedRoute path="/students" component={ListStudents}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
             <Route component={NotFound}/>
           </Switch>
@@ -46,6 +44,26 @@ class App extends React.Component {
     );
   }
 }
+
+/**
+ * HomeRoute
+ * Checks for Meteor login to route to the appropriate home page.
+ * @param {any} { component: Component, ...rest }
+ */
+const HomeRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => {
+      const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+      const isStudent = Roles.userIsInRole(Meteor.userId(), 'student');
+      const isCompany = Roles.userIsInRole(Meteor.userId(), 'company');
+      if (isAdmin) return (<Redirect to={{ pathname: '/admin', state: { from: props.location } } }/>);
+      if (isStudent) return (<Redirect to={{ pathname: '/student', state: { from: props.location } } }/>);
+      if (isCompany) return (<Redirect to={{ pathname: '/company', state: { from: props.location } } }/>);
+      return (<Component {...props} />);
+    }}
+  />
+);
 
 /**
  * ProtectedRoute (see React Router v4 sample)
@@ -58,6 +76,48 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
     render={(props) => {
       const isLogged = Meteor.userId() !== null;
       return isLogged ?
+        (<Component {...props} />) :
+        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
+        );
+    }}
+  />
+);
+
+/**
+ * StudentProtectedRoute (see React Router v4 sample)
+ * Checks for Meteor login and student role before routing to the requested page, otherwise goes to signin page.
+ * Admin is also allowed access.
+ * @param {any} { component: Component, ...rest }
+ */
+const StudentProtectedRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => {
+      const isLogged = Meteor.userId() !== null;
+      const isStudent = Roles.userIsInRole(Meteor.userId(), 'student');
+      const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+      return (isLogged && (isStudent || isAdmin)) ?
+        (<Component {...props} />) :
+        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
+        );
+    }}
+  />
+);
+
+/**
+ * CompanyProtectedRoute (see React Router v4 sample)
+ * Checks for Meteor login and student role before routing to the requested page, otherwise goes to signin page.
+ * Admin is also allowed access.
+ * @param {any} { component: Component, ...rest }
+ */
+const CompanyProtectedRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => {
+      const isLogged = Meteor.userId() !== null;
+      const isCompany = Roles.userIsInRole(Meteor.userId(), 'company');
+      const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
+      return (isLogged && (isCompany || isAdmin)) ?
         (<Component {...props} />) :
         (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
         );
@@ -84,8 +144,21 @@ const AdminProtectedRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+HomeRoute.propTypes = {
+  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  location: PropTypes.object,
+};
+
 // Require a component and location to be passed to each ProtectedRoute.
 ProtectedRoute.propTypes = {
+  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  location: PropTypes.object,
+};
+StudentProtectedRoute.propTypes = {
+  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  location: PropTypes.object,
+};
+CompanyProtectedRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
 };

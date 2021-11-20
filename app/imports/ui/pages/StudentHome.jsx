@@ -17,7 +17,7 @@ class Landing extends React.Component {
           <h4> Create a profile where you can add your interests, skills, location, and a link to your portfolio for companies to view.</h4>
         </Grid.Row>
         <Grid.Row>
-          <Button color='#00502F' attached='bottom'>Create/Edit Profile</Button>
+          <Button attached='bottom'>Create/Edit Profile</Button>
         </Grid.Row>
         <Grid.Row>
           <h1>Browse Companies</h1>
@@ -26,7 +26,7 @@ class Landing extends React.Component {
           <h4>Search for companies that match your experience and interests</h4>
         </Grid.Row>
         <Grid.Row>
-          <Button color='#00502F' attached='bottom'>Find Companies</Button>
+          <Button attached='bottom'>Find Companies</Button>
         </Grid.Row>
       </Grid>
     );
