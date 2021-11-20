@@ -5,7 +5,7 @@ import { Button, Grid } from 'semantic-ui-react';
 class Landing extends React.Component {
   render() {
     return (
-      <Grid textAlign='center' relaxed container>
+      <Grid id="student-home-page" textAlign='center' relaxed container>
         <Grid.Row>
           <h1>Welcome to Career Match</h1>
           <h2>As a student, Career Match will allow you to create and customize your own profile to help you match with companies. We work with many businesses and corporations locally and out of state to help find the job that is right for you.</h2>
