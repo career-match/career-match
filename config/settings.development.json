@@ -9,12 +9,52 @@
     {
       "name": "John Smith", "owner": "john@foo.com", "type": "student",
       "location": "Honolulu, Hawaii, U.S.",
-      "description": "John Smith is an undergraduate student at UH Manoa, graduating in Spring 2022."
+      "description": "John Smith is an undergraduate student at UH Manoa, graduating in Spring 2022.",
+      "skills": [
+        "CSS", "Graphic Design", "HTML"
+      ]
     },
     {
-      "name": "Apple", "owner": "alice@apple.com", "type": "company",
+      "name": "Jane Doe", "owner": "admin@foo.com", "type": "student",
+      "location": "Honolulu, Hawaii, U.S.",
+      "description": "Jane Doe is an undergraduate student at UH Manoa, graduating in Spring 2022.",
+      "skills": [
+        "JavaScript", "Meteor", "Python"
+      ]
+    },
+    {
+      "name": "Apple",
+      "owner": "alice@apple.com",
+      "type": "company",
       "location": "Cupertino, California, U.S.",
-      "description": "Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software and online services. Apple is the largest information technology company by revenue (totaling $274.5 billion in 2020) and, since January 2021, the world's most valuable company. As of 2021, Apple is the fourth-largest PC vendor by unit sales and fourth-largest smartphone manufacturer. It is one of the Big Five American information technology companies, alongside Amazon, Google (Alphabet), Facebook (Meta), and Microsoft."
+      "description": "Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software and online services. Apple is the largest information technology company by revenue (totaling $274.5 billion in 2020) and, since January 2021, the world's most valuable company. As of 2021, Apple is the fourth-largest PC vendor by unit sales and fourth-largest smartphone manufacturer. It is one of the Big Five American information technology companies, alongside Amazon, Google (Alphabet), Facebook (Meta), and Microsoft.",
+      "skills": [
+        "Object-Oriented Analysis and Design",
+        "Product Development",
+        "Data Structures",
+        "Linux",
+        "Software Architecture",
+        "Firmware",
+        "Scala",
+        "Git"
+      ]
+    },
+    {
+      "name": "Google",
+      "owner": "admin@foo.com",
+      "type": "company",
+      "location": "Mountain View, California, U.S.",
+      "description": "Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, a search engine, cloud computing, software, and hardware. It is considered one of the Big Five companies in the American information technology industry, along with Amazon, Apple, Meta (Facebook) and Microsoft.",
+      "skills": [
+        "Object-Oriented Analysis and Design",
+        "Abstract Math",
+        "Data Structures",
+        "Operating Systems",
+        "Algorithms",
+        "Artificial Intelligence",
+        "Cryptography",
+        "Parallel Programming"
+      ]
     }
   ]
 }
