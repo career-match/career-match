@@ -29,6 +29,10 @@ class NavBar {
     await testController.click('#navbar-students');
   }
 
+  async gotoLandingPage(testController) {
+    await testController.click('#navbar-landing');
+  }
+
   /** Check that the specified user is currently logged in. */
   async isLoggedIn(testController, username) {
     const loggedInUser = Selector('#navbar-current-user').innerText;
