@@ -5,7 +5,7 @@ import { Button, Grid } from 'semantic-ui-react';
 class Landing extends React.Component {
   render() {
     return (
-      <Grid textAlign='center' relaxed container>
+      <Grid id='student-home-page' textAlign='center' relaxed container>
         <Grid.Row>
           <h1>Welcome to Career Match</h1>
           <h2>As a student, Career Match will allow you to create and customize your own profile to help you match with companies. We work with many businesses and corporations locally and out of state to help find the job that is right for you.</h2>
@@ -17,7 +17,7 @@ class Landing extends React.Component {
           <h4> Create a profile where you can add your interests, skills, location, and a link to your portfolio for companies to view.</h4>
         </Grid.Row>
         <Grid.Row>
-          <Button color='#00502F' attached='bottom' as='a' href='#/edit/:_id'>Create/Edit Profile</Button>
+          <Button id='student-edit-profile-button' color='#00502F' attached='bottom' as='a' href='#/edit/:_id'>Create/Edit Profile</Button>
         </Grid.Row>
         <Grid.Row>
           <h1>Browse Companies</h1>
@@ -26,7 +26,7 @@ class Landing extends React.Component {
           <h4>Search for companies that match your experience and interests</h4>
         </Grid.Row>
         <Grid.Row>
-          <Button color='#00502F' attached='bottom' as='a' href='#/companies'>Find Companies</Button>
+          <Button id='find-companies-button' color='#00502F' attached='bottom' as='a' href='#/companies'>Find Companies</Button>
         </Grid.Row>
       </Grid>
     );
