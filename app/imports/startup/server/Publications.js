@@ -68,7 +68,7 @@ Meteor.publish(Company.recruiterPublicationName, function () {
 
 Meteor.publish(Student.studentPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'student')) {
-    return Company.collection.find();
+    return Student.collection.find();
   }
   return this.ready();
 });
