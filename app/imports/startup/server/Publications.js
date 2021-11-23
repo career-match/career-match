@@ -12,6 +12,18 @@ Meteor.publish(Profiles.userPublicationName, function () {
   return this.ready();
 });
 
+// Student profile publication.
+// Publish all student profiles.
+Meteor.publish(Profiles.studentPublicationName, function () {
+  return Profiles.collection.find({ type: 'student' });
+});
+
+// Company profile publication.
+// Publish all company profiles.
+Meteor.publish(Profiles.companyPublicationName, function () {
+  return Profiles.collection.find({ type: 'company' });
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
 Meteor.publish(Profiles.adminPublicationName, function () {
