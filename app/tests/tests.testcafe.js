@@ -39,6 +39,14 @@ test('Test pages accessible to student', async (testController) => {
   await searchPage.isDisplayed(testController);
   await navBar.gotoListCompaniesPage(testController);
   await listCompaniesPage.isDisplayed(testController);
+  await navBar.gotoLandingPage(testController);
+  await studentHomePage.gotoFindCompanies(testController);
+  await listCompaniesPage.isDisplayed(testController);
+  await navBar.gotoLandingPage(testController);
+  await studentHomePage.isDisplayed(testController);
+  // TODO: Implement Student Profile Page and uncomment the following lines
+  /* await studentHomePage.gotoEditProfile(testController);
+  await studentProfile.isDisplayed(testController); */
 
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
