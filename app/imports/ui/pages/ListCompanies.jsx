@@ -39,8 +39,10 @@ ListCompanies.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Company.userPublicationName);
+  const subscription2 = Meteor.subscribe(Company.adminPublicationName);
+  const subscription3 = Meteor.subscribe(Company.studentPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready();
   // Get the Stuff documents
   const companies = Company.collection.find({}).fetch();
   return {

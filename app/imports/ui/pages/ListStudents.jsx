@@ -1,9 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Card, Image } from 'semantic-ui-react';
+import { Container, Card, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Student } from '../../api/student/Student';
+import StudentItem from '../components/StudentItem';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStudents extends React.Component {
@@ -18,20 +19,11 @@ class ListStudents extends React.Component {
     return (
       <Container>
         <Header as="h2" textAlign="center">List Students</Header>
-        <Card centered>
-          <Card.Content>
-            <Image
-              floated='right'
-              size='large'
-              src={'https://www.eurocircuits.com/wp-content/uploads/Student-icon.jpg'}
-            />
-            <Card.Header>John Doe</Card.Header>
-            <Card.Meta>1234 Aloha Way</Card.Meta>
-            <Card.Description>
-              Studied At University of Hawaii at Manoa.
-            </Card.Description>
-          </Card.Content>
-        </Card>
+        <Card.Group centered>
+          {this.props.students.map((student, index) => <StudentItem
+            key={index}
+            student={student} />)}
+        </Card.Group>
       </Container>
     );
   }
@@ -39,20 +31,23 @@ class ListStudents extends React.Component {
 
 // Require an array of Stuff documents in the props.
 ListStudents.propTypes = {
-  stuffs: PropTypes.array.isRequired,
+  students: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  const subscription = Meteor.subscribe(Student.userPublicationName);
+  const subscription2 = Meteor.subscribe(Student.adminPublicationName);
+  const subscription3 = Meteor.subscribe(Student.recruiterPublicationName);
+  const subscription4 = Meteor.subscribe(Student.studentPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
   // Get the Stuff documents
-  const stuffs = Stuffs.collection.find({}).fetch();
+  const students = Student.collection.find({}).fetch();
   return {
-    stuffs,
+    students,
     ready,
   };
 })(ListStudents);

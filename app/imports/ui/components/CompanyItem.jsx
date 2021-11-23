@@ -22,7 +22,7 @@ class CompanyItem extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <p>Looking for students who are experienced in: {this.props.company.condition}</p>
+          <p>Looking for students who are experienced in: {this.props.company.interest}</p>
         </Card.Content>
         <Card.Content extra>
           <Link to={`/edit/${this.props.company._id}`}>Edit</Link>
@@ -34,7 +34,15 @@ class CompanyItem extends React.Component {
 
 // Require a document to be passed to this component.
 CompanyItem.propTypes = {
-  company: PropTypes.object.isRequired,
+  company: PropTypes.shape({
+    company: PropTypes.string,
+    address: PropTypes.string,
+    phone: PropTypes.string,
+    _id: PropTypes.string,
+    description: PropTypes.string,
+    interest: PropTypes.string,
+    image: PropTypes.string,
+  }).isRequired,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.

@@ -5,11 +5,11 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Company } from '../../api/company/Company';
+import { Student } from '../../api/student/Student';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  company: String,
+  name: String,
   address: String,
   description: String,
   phone: String,
@@ -24,13 +24,13 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /** Renders the Page for adding a document. */
-class AddCompany extends React.Component {
+class AddStudent extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { company, address, phone, description, interest, image } = data;
+    const { name, address, phone, description, interest, image } = data;
     const owner = Meteor.user().username;
-    Company.collection.insert({ company, address, phone, description, interest, image, owner },
+    Student.collection.insert({ name, address, phone, description, interest, image, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -47,10 +47,10 @@ class AddCompany extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Add Company</Header>
+          <Header as="h2" textAlign="center">Add Student</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <TextField name='company'/>
+              <TextField name='name'/>
               <TextField name='address'/>
               <TextField name='phone'/>
               <TextField name='image'/>
@@ -66,4 +66,4 @@ class AddCompany extends React.Component {
   }
 }
 
-export default AddCompany;
+export default AddStudent;

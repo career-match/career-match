@@ -19,6 +19,7 @@ import AdminHome from '../pages/AdminHome';
 import StudentHome from '../pages/StudentHome';
 import CompanyHome from '../pages/CompanyHome';
 import AddCompany from '../pages/AddCompany';
+import AddStudent from '../pages/AddStudent';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -38,6 +39,7 @@ class App extends React.Component {
             <ProtectedRoute path="/companies" component={ListCompanies}/>
             <ProtectedRoute path="/students" component={ListStudents}/>
             <RecruiterProtectedRoute path="/addcompanies" component={AddCompany}/>
+            <StudentProtectedRoute path="/addstudent" component={AddStudent}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
             <Route component={NotFound}/>
@@ -100,6 +102,20 @@ const RecruiterProtectedRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+const StudentProtectedRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => {
+      const isLogged = Meteor.userId() !== null;
+      const isStudent = Roles.userIsInRole(Meteor.userId(), 'student');
+      return (isLogged && isStudent) ?
+        (<Component {...props} />) :
+        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
+        );
+    }}
+  />
+);
+
 // Require a component and location to be passed to each ProtectedRoute.
 ProtectedRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
@@ -114,6 +130,11 @@ AdminProtectedRoute.propTypes = {
 
 // Require a component and location to be passed to each AdminProtectedRoute.
 RecruiterProtectedRoute.propTypes = {
+  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  location: PropTypes.object,
+};
+
+StudentProtectedRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
 };
