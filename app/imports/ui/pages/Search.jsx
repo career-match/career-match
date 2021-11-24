@@ -16,10 +16,10 @@ const options = [
 ];
 
 /** A simple static component to render some text for the landing page. */
-class SearchPage extends React.Component {
+class Search extends React.Component {
   render() {
     return (
-      <Grid textAlign='center' relaxed container>
+      <Grid id="search-page" textAlign='center' relaxed container>
         <Grid.Row>
           <h1>Career Match</h1>
         </Grid.Row>
@@ -33,7 +33,7 @@ class SearchPage extends React.Component {
           <h2>Enter your zip-code to match with companies.</h2>
         </Grid.Row>
         <Grid.Row>
-          <Input size='medium' icon placeholder='zipcode...'>
+          <Input icon placeholder='zipcode...'>
             <input/>
             <Icon name='search'/>
           </Input>
@@ -43,4 +43,4 @@ class SearchPage extends React.Component {
   }
 }
 
-export default SearchPage;
+export default Search;

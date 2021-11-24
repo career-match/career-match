@@ -17,7 +17,7 @@ class ListCompanies extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container>
+      <Container id="list-companies-page">
         <Header as="h2" textAlign="center">List Companies</Header>
         <Card.Group centered>
           {this.props.companies.map((company, index) => <CompanyItem

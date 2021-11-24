@@ -1,9 +1,9 @@
-name: ci-meteor-application-template-react
+name: ci-career-match
 
 on:
   push:
     branches:
-      - master
+      - main
 
 defaults:
   run:
@@ -33,8 +33,10 @@ jobs:
 
       - run: npm install -g meteor
 
+      - uses: meteorengineer/setup-meteor@v1
       - name: Run Meteor commands
         shell: bash -l {0}
         run: |
           meteor npm install
           meteor npm run lint
+          meteor npm run testcafe

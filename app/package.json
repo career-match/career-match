@@ -1,5 +1,5 @@
 {
-  "name": "meteor-application-template-react",
+  "name": "career-match",
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.15.4",
@@ -36,6 +36,6 @@
     "start": "meteor --no-release-check --exclude-archs web.browser.legacy,web.cordova --settings ../config/settings.development.json",
     "lint": "eslint --quiet --fix --ext .jsx --ext .js ./imports",
     "testcafe-development": "testcafe chrome tests/*.testcafe.js",
-    "testcafe": "testcafe chrome:headless tests/*.testcafe.js -q --app \"meteor npm run start\""
+    "testcafe": "testcafe chrome:headless tests/*.testcafe.js -q --page-request-timeout 100000 --app \"meteor npm run start\""
   }
 }

@@ -5,7 +5,7 @@ import { Grid, Button } from 'semantic-ui-react';
 class CompanyHome extends React.Component {
   render() {
     return (
-      <Grid textAlign='center' relaxed container>
+      <Grid id="company-home-page" textAlign='center' relaxed container>
         <Grid.Row>
           <h1>Welcome to Career Match</h1>
         </Grid.Row>
@@ -16,7 +16,7 @@ class CompanyHome extends React.Component {
           <h4>Add your company to our Career Match.</h4>
         </Grid.Row>
         <Grid.Row>
-          <Button color='#00502F' attached='bottom'>Add Company</Button>
+          <Button attached='bottom'>Add Company</Button>
         </Grid.Row>
         <Grid.Row>
           <h2>Explore Users</h2>
@@ -25,7 +25,7 @@ class CompanyHome extends React.Component {
           <h4>Search users who has experience and interests that your company&apos;s looking for.</h4>
         </Grid.Row>
         <Grid.Row>
-          <Button color='#00502F' attached='bottom'>Find People</Button>
+          <Button attached='bottom'>Find People</Button>
         </Grid.Row>
       </Grid>
     );

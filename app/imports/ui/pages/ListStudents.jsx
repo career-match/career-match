@@ -17,7 +17,7 @@ class ListStudents extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container>
+      <Container id="list-students-page">
         <Header as="h2" textAlign="center">List Students</Header>
         <Card.Group centered>
           {this.props.students.map((student, index) => <StudentItem

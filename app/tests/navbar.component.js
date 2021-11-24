@@ -17,6 +17,22 @@ class NavBar {
     await testController.click('#login-dropdown-sign-in');
   }
 
+  async gotoSearchPage(testController) {
+    await testController.click('#navbar-search');
+  }
+
+  async gotoListCompaniesPage(testController) {
+    await testController.click('#navbar-companies');
+  }
+
+  async gotoListStudentsPage(testController) {
+    await testController.click('#navbar-students');
+  }
+
+  async gotoLandingPage(testController) {
+    await testController.click('#navbar-landing');
+  }
+
   /** Check that the specified user is currently logged in. */
   async isLoggedIn(testController, username) {
     const loggedInUser = Selector('#navbar-current-user').innerText;
