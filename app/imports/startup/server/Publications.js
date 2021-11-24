@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { Stuffs } from '../../api/stuff/Stuff';
 import { Company } from '../../api/company/Company';
 import { Student } from '../../api/student/Student';
 
@@ -18,27 +17,6 @@ Meteor.publish(Company.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Company.collection.find({ owner: username });
-  }
-  return this.ready();
-});
-
-// Student profile publication.
-// Publish all student profiles.
-Meteor.publish(Profiles.studentPublicationName, function () {
-  return Profiles.collection.find({ type: 'student' });
-});
-
-// Company profile publication.
-// Publish all company profiles.
-Meteor.publish(Profiles.companyPublicationName, function () {
-  return Profiles.collection.find({ type: 'company' });
-});
-
-// Admin-level publication.
-// If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
-Meteor.publish(Profiles.adminPublicationName, function () {
-  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Profiles.collection.find();
   }
   return this.ready();
 });

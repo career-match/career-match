@@ -14,7 +14,7 @@ import { signupPage } from './signup.page';
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const student = { username: 'john@foo.com', password: 'changeme' };
-const company = { username: 'alice@apple.com', password: 'changeme' };
+const recruiter = { username: 'apple@foo.com', password: 'changeme' };
 const admin = { username: 'admin@foo.com', password: 'changeme' };
 
 fixture('career-match localhost test with default db')
@@ -52,10 +52,10 @@ test('Test pages accessible to student', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test('Test pages accessible to company', async (testController) => {
+test('Test pages accessible to recruiter', async (testController) => {
   await navBar.gotoSigninPage(testController);
-  await signinPage.signin(testController, company.username, company.password);
-  await navBar.isLoggedIn(testController, company.username);
+  await signinPage.signin(testController, recruiter.username, recruiter.password);
+  await navBar.isLoggedIn(testController, recruiter.username);
 
   await companyHomePage.isDisplayed(testController);
   await navBar.gotoSearchPage(testController);

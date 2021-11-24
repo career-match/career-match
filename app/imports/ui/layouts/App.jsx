@@ -15,10 +15,10 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Search from '../pages/Search';
 import AdminHome from '../pages/AdminHome';
-import StudentHome from '../pages/StudentHome';
 import CompanyHome from '../pages/CompanyHome';
 import AddCompany from '../pages/AddCompany';
 import AddStudent from '../pages/AddStudent';
+import StudentHome from '../pages/StudentHome';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -32,13 +32,13 @@ class App extends React.Component {
             <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
-            <Route path="/searchpage" component={SearchPage}/>
-            <Route path="/company" component={CompanyHome}/>
+            <Route path="/search" component={Search}/>
+            <RecruiterProtectedRoute path="/company" component={CompanyHome}/>
+            <StudentProtectedRoute path="/student" component={StudentHome}/>
             <ProtectedRoute path="/companies" component={ListCompanies}/>
             <ProtectedRoute path="/students" component={ListStudents}/>
             <RecruiterProtectedRoute path="/addcompanies" component={AddCompany}/>
             <StudentProtectedRoute path="/addstudent" component={AddStudent}/>
-            <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
             <Route component={NotFound}/>
           </Switch>
@@ -60,7 +60,7 @@ const HomeRoute = ({ component: Component, ...rest }) => (
     render={(props) => {
       const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
       const isStudent = Roles.userIsInRole(Meteor.userId(), 'student');
-      const isCompany = Roles.userIsInRole(Meteor.userId(), 'company');
+      const isCompany = Roles.userIsInRole(Meteor.userId(), 'recruiter');
       if (isAdmin) return (<Redirect to={{ pathname: '/admin', state: { from: props.location } } }/>);
       if (isStudent) return (<Redirect to={{ pathname: '/student', state: { from: props.location } } }/>);
       if (isCompany) return (<Redirect to={{ pathname: '/company', state: { from: props.location } } }/>);
@@ -142,16 +142,13 @@ const RecruiterProtectedRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+HomeRoute.propTypes = {
+  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  location: PropTypes.object,
+};
+
 // Require a component and location to be passed to each ProtectedRoute.
 ProtectedRoute.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  location: PropTypes.object,
-};
-StudentProtectedRoute.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  location: PropTypes.object,
-};
-CompanyProtectedRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
 };
