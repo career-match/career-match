@@ -23,6 +23,14 @@ function createUser(email, password, role) {
     Roles.createRole(role, { unlessExists: true });
     Roles.addUsersToRoles(userID, 'admin');
   }
+  if (role === 'recruiter') {
+    Roles.createRole(role, { unlessExists: true });
+    Roles.addUsersToRoles(userID, 'recruiter');
+  }
+  if (role === 'student') {
+    Roles.createRole(role, { unlessExists: true });
+    Roles.addUsersToRoles(userID, 'student');
+  }
 }
 
 // When running app for first time, pass a settings file to set up a default user account.
