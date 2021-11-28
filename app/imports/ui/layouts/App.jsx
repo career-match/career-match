@@ -33,11 +33,11 @@ class App extends React.Component {
             <Route path="/signout" component={Signout}/>
             <RecruiterProtectedRoute path="/edit-company-profile/:_id" component={EditCompanyProfile}/>
             <StudentProtectedRoute path="/edit-student-profile/:_id" component={EditStudentProfile}/>
-            <RecruiterProtectedRoute path="/company" component={CompanyHome}/>
             <StudentProtectedRoute path="/student" component={StudentHome}/>
+            <RecruiterProtectedRoute path="/company" component={CompanyHome}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
-            <RecruiterProtectedRoute path="/find-companies" component={FindCompanies}/>
-            <StudentProtectedRoute path="/find-students" component={FindStudents}/>
+            <StudentProtectedRoute path="/find-companies" component={FindCompanies}/>
+            <RecruiterProtectedRoute path="/find-students" component={FindStudents}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
+import { Card, Image } from 'semantic-ui-react';
 import { withRouter, Link } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class CompanyItem extends React.Component {
@@ -24,9 +26,12 @@ class CompanyItem extends React.Component {
         <Card.Content extra>
           <p>Looking for students who are experienced in: {this.props.company.interest}</p>
         </Card.Content>
-        <Card.Content extra>
-          <Link to={`/edit/${this.props.company._id}`}>Edit</Link>
-        </Card.Content>
+        {/** Display the Edit link only if logged in as admin */
+          Roles.userIsInRole(Meteor.userId(), 'admin') ?
+            (<Card.Content extra>
+              <Link to={`/edit-company-profile/${this.props.company._id}`}>Edit</Link>
+            </Card.Content>) : ''
+        }
       </Card>
     );
   }

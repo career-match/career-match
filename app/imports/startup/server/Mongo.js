@@ -7,14 +7,14 @@ import { Student } from '../../api/student/Student';
 function addCompany(data) {
   console.log(`  Adding: ${data.company} (${data.owner})`);
   const doc = data;
-  doc._id = Accounts.findUserByEmail(data.owner).userId();
+  doc._id = Accounts.findUserByEmail(data.owner).userId;
   Company.collection.insert(doc);
 }
 
 function addStudent(data) {
   console.log(`  Adding: ${data.name} (${data.owner})`);
   const doc = data;
-  doc._id = Accounts.findUserByEmail(data.owner).userId();
+  doc._id = Accounts.findUserByEmail(data.owner).userId;
   Student.collection.insert(doc);
 }
 
