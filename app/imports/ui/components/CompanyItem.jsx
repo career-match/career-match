@@ -16,7 +16,7 @@ class CompanyItem extends React.Component {
             size='small'
             src={this.props.company.image}
           />
-          <Card.Header>{this.props.company.company}</Card.Header>
+          <Card.Header>{this.props.company.name}</Card.Header>
           <Card.Meta>{this.props.company.address}</Card.Meta>
           <Card.Meta>{this.props.company.phone}</Card.Meta>
           <Card.Description>

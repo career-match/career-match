@@ -13,7 +13,7 @@ class CompanyCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      company: String,
+      name: String,
       address: String,
       phone: String,
       description: String,
@@ -29,9 +29,6 @@ class CompanyCollection {
     this.collection.attachSchema(this.schema);
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
-    this.adminPublicationName = `${this.name}.publication.admin`;
-    this.studentPublicationName = `${this.name}.publication.student`;
-    this.recruiterPublicationName = `${this.name}.publication.recruiter`;
   }
 }
 

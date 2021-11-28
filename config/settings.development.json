@@ -28,7 +28,7 @@
   ],
   "defaultCompany": [
     {
-      "company": "Apple",
+      "name": "Apple",
       "address": "One Apple Park Way, Cupertino, CA 95014",
       "phone": "(800)692–7753",
       "condition": "css",
@@ -37,7 +37,7 @@
       "owner": "apple@foo.com"
     },
     {
-      "company": "Intel",
+      "name": "Intel",
       "address": "2200 Mission College Blvd., Santa Clara, CA",
       "phone": "(408)765-8080",
       "condition": "design",

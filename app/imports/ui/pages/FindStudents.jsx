@@ -38,11 +38,8 @@ FindStudents.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Student.userPublicationName);
-  const subscription2 = Meteor.subscribe(Student.adminPublicationName);
-  const subscription3 = Meteor.subscribe(Student.recruiterPublicationName);
-  const subscription4 = Meteor.subscribe(Student.studentPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
+  const ready = subscription.ready();
   // Get the Stuff documents
   const students = Student.collection.find({}).fetch();
   return {

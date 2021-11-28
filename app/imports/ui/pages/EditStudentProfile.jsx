@@ -15,8 +15,8 @@ class EditStudentProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { name, quantity, condition, _id } = data;
-    Student.collection.update(_id, { $set: { name, quantity, condition } }, (error) => (error ?
+    const { name, address, phone, description, image, owner, _id } = data;
+    Student.collection.update(_id, { $set: { name, address, phone, description, image, owner } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Item updated successfully', 'success')));
   }
@@ -35,8 +35,10 @@ class EditStudentProfile extends React.Component {
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
               <TextField name='name'/>
-              <NumField name='quantity' decimal={false}/>
-              <SelectField name='condition'/>
+              <TextField name='address'/>
+              <TextField name='phone'/>
+              <TextField name='description'/>
+              <TextField name='image'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
               <HiddenField name='owner' />
@@ -59,7 +61,7 @@ EditStudentProfile.propTypes = {
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
-  // Get access to Stuff documents.
+  // Get access to documents.
   const subscription = Meteor.subscribe(Student.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
