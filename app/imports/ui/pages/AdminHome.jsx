@@ -13,13 +13,13 @@ class Landing extends React.Component {
           <h2> Manage Student Profiles </h2>
         </Grid.Row>
         <Grid.Row>
-          <Button id='edit-students-button' color='#00502F' attached='bottom' as='a' href='#/students'>Edit Students</Button>
+          <Button id='edit-students-button' attached='bottom' as='a' href='#/students'>Edit Students</Button>
         </Grid.Row>
         <Grid.Row>
           <h2>Manage Company Profiles</h2>
         </Grid.Row>
         <Grid.Row>
-          <Button id='find-companies-button' color='#00502F' attached='bottom' as='a' href='#/companies'>Find Companies</Button>
+          <Button id='find-companies-button' attached='bottom' as='a' href='#/companies'>Find Companies</Button>
         </Grid.Row>
       </Grid>
     );
