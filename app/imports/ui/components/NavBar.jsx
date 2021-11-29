@@ -29,18 +29,6 @@ class NavBar extends React.Component {
               My Company Profile
             </Menu.Item>) : ''
         }
-        {/** Display the Edit Profile link if logged in as a student */
-          Roles.userIsInRole(Meteor.userId(), 'student') ?
-            (<Menu.Item id="navbar-edit-profile" as={NavLink} activeClassName="active" exact to={`/edit-student-profile/${Meteor.userId()}`}>
-              Edit Profile
-            </Menu.Item>) : ''
-        }
-        {/** Display the Edit Profile link if logged in as a recruiter */
-          Roles.userIsInRole(Meteor.userId(), 'recruiter') ?
-            (<Menu.Item id="navbar-edit-profile" as={NavLink} activeClassName="active" exact to={`/edit-company-profile/${Meteor.userId()}`}>
-              Edit Profile
-            </Menu.Item>) : ''
-        }
         {/** Display the Find Companies link if logged in as a student or admin */
           Roles.userIsInRole(Meteor.userId(), 'student') ||
           Roles.userIsInRole(Meteor.userId(), 'admin') ?

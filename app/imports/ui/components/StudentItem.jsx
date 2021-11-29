@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Card, Image } from 'semantic-ui-react';
+import { Button, Card, Image } from 'semantic-ui-react';
 import { withRouter, Link } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 
@@ -27,9 +27,14 @@ class StudentItem extends React.Component {
           <p>Have experienced in: {this.props.student.interest}</p>
         </Card.Content>
         {/** Display the Edit link only if logged in as admin */
-          Roles.userIsInRole(Meteor.userId(), 'admin') ?
+          Roles.userIsInRole(Meteor.userId(), 'admin') ||
+          Roles.userIsInRole(Meteor.userId(), 'student') ?
             (<Card.Content extra>
-              <Link to={`/edit-student-profile/${this.props.student._id}`}>Edit</Link>
+              <div className='ui two buttons'>
+                <Button basic color='black'>
+                  <Link to={`/edit-student-profile/${this.props.student._id}`}>Edit</Link>
+                </Button>
+              </div>
             </Card.Content>) : ''
         }
       </Card>
