@@ -15,6 +15,20 @@ class NavBar extends React.Component {
         <Menu.Item id="navbar-landing" as={NavLink} activeClassName='' exact to='/'>
           <Header inverted as='h1'>Career Match</Header>
         </Menu.Item>
+        {/** Display the Find Students link if logged in as a recruiter or admin */
+          Roles.userIsInRole(Meteor.userId(), 'student') ||
+          Roles.userIsInRole(Meteor.userId(), 'admin') ?
+            (<Menu.Item id="navbar-view-students-profile" as={NavLink} activeClassName="active" exact to="/view-students-profile">
+              My Student Profile
+            </Menu.Item>) : ''
+        }
+        {/** Display the Find Students link if logged in as a recruiter or admin */
+          Roles.userIsInRole(Meteor.userId(), 'recruiter') ||
+          Roles.userIsInRole(Meteor.userId(), 'admin') ?
+            (<Menu.Item id="navbar-view-companies-profile" as={NavLink} activeClassName="active" exact to="/view-companies-profile">
+              My Company Profile
+            </Menu.Item>) : ''
+        }
         {/** Display the Edit Profile link if logged in as a student */
           Roles.userIsInRole(Meteor.userId(), 'student') ?
             (<Menu.Item id="navbar-edit-profile" as={NavLink} activeClassName="active" exact to={`/edit-student-profile/${Meteor.userId()}`}>
