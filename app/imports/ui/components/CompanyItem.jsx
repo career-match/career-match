@@ -40,7 +40,7 @@ class CompanyItem extends React.Component {
 // Require a document to be passed to this component.
 CompanyItem.propTypes = {
   company: PropTypes.shape({
-    company: PropTypes.string,
+    name: PropTypes.string,
     address: PropTypes.string,
     phone: PropTypes.string,
     _id: PropTypes.string,

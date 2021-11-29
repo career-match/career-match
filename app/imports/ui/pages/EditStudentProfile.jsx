@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, HiddenField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -29,7 +29,7 @@ class EditStudentProfile extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     return (
-      <Grid container centered>
+      <Grid container centered id="edit-student-profile-page">
         <Grid.Column>
           <Header as="h2" textAlign="center">Edit Student Profile</Header>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
