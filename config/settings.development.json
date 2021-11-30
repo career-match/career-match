@@ -44,6 +44,96 @@
       "description": "We create world-changing technology that improves the life of every person on the planet. We are inspired to: Drive innovation that makes the world safer, builds healthy and vibrant communities, and increases productivity. We have big ambitions, and a growing sense of urgency to work with others and address world challenges no one can tackle alone.",
       "image": "https://images.idgesg.net/images/article/2019/01/intel-logo-100786098-large.jpg",
       "owner": "intel@foo.com"
+    },
+    {
+      "name": "Google",
+      "address": "Google Inc. 1600 Amphitheatre Pkwy. Mountain View, CA 94043",
+      "phone": "1-650-253-0000",
+      "condition": "cybersecurity",
+      "description": "Our mission is to organize the world’s information and make it universally accessible and useful. We are committed to significantly improving the lives of as many people as possible. We are building a world where progress, equitable outcomes, diversity, and inclusion can be realities both inside and outside our workplace.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png",
+      "owner": "google@foo.com"
+    },
+    {
+      "name": "Microsoft",
+      "address": "Microsoft Corporation. One Microsoft Way. Redmond, WA 98052-7329",
+      "phone": "(425) 882-8080",
+      "condition": "design",
+      "description": "Microsoft enables digital transformation for the era of an intelligent cloud and an intelligent edge. Its mission is to empower every person and every organization on the planet to achieve more.",
+      "image": "https://purepng.com/public/uploads/large/purepng.com-microsoft-logo-iconlogobrand-logoiconslogos-251519939091wmudn.png",
+      "owner": "microsoft@foo.com"
+    },
+    {
+      "name": "",
+      "address": "",
+      "phone": "",
+      "condition": "",
+      "description": "",
+      "image": "",
+      "owner": ""
+    },
+    {
+      "name": "",
+      "address": "",
+      "phone": "",
+      "condition": "",
+      "description": "",
+      "image": "",
+      "owner": ""
+    },
+    {
+      "name": "",
+      "address": "",
+      "phone": "",
+      "condition": "",
+      "description": "",
+      "image": "",
+      "owner": ""
+    },
+    {
+      "name": "",
+      "address": "",
+      "phone": "",
+      "condition": "",
+      "description": "",
+      "image": "",
+      "owner": ""
+    },
+    {
+      "name": "",
+      "address": "",
+      "phone": "",
+      "condition": "",
+      "description": "",
+      "image": "",
+      "owner": ""
+    },
+    {
+      "name": "",
+      "address": "",
+      "phone": "",
+      "condition": "",
+      "description": "",
+      "image": "",
+      "owner": ""
+    },
+    {
+      "name": "",
+      "address": "",
+      "phone": "",
+      "condition": "",
+      "description": "",
+      "image": "",
+      "owner": ""
+    },
+    {
+      "name": "",
+      "address": "",
+      "phone": "",
+      "condition": "",
+      "description": "",
+      "image": "",
+      "owner": ""
     }
   ],
   "defaultStudent": [
