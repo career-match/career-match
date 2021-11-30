@@ -1,8 +1,11 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
+import { addRoleMethod } from '../../startup/both/Methods';
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -11,7 +14,7 @@ class Signup extends React.Component {
   /* Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', role: 'student', error: '', redirectToReferer: false };
+    this.state = { email: '', password: '', role: '', error: '', redirectToReferer: false };
   }
 
   /* Update the form controls each time the user interacts with them. */
@@ -19,13 +22,20 @@ class Signup extends React.Component {
     this.setState({ [name]: value });
   }
 
+  handleChange2 = (e, { value }) => {
+    this.setState({ value });
+    this.setState({ role: value });
+  }
+
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
-    const { email, password } = this.state;
-    Accounts.createUser({ email, username: email, password }, (err) => {
+    const { email, password, role } = this.state;
+    Accounts.createUser({ email, username: email, password, role }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
+        Meteor.call(addRoleMethod, this.state);
+        swal('You have registered successfully.');
         this.setState({ error: '', redirectToReferer: true });
       }
     });
@@ -33,7 +43,6 @@ class Signup extends React.Component {
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
   render() {
-    const { role } = this.state;
     const { from } = this.props.location.state || { from: { pathname: '/add' } };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {
@@ -74,15 +83,15 @@ class Signup extends React.Component {
                     label='Student'
                     name='role'
                     value='student'
-                    checked={role === 'student'}
-                    onChange={this.handleChange}
+                    checked={this.state.value === 'student'}
+                    onChange={this.handleChange2}
                   />
                   <Form.Radio
                     label='Company'
                     name='role'
                     value='company'
-                    checked={role === 'company'}
-                    onChange={this.handleChange}
+                    checked={this.state.value === 'company'}
+                    onChange={this.handleChange2}
                   />
                 </Form.Group>
                 <Form.Button id="signup-form-submit" content="Submit"/>
