@@ -11,11 +11,11 @@ class AdminHomePage {
     await testController.expect(this.pageSelector.exists).ok();
   }
 
-  async gotoEditStudents(testController) {
-    await testController.click('#edit-students-button');
+  async gotoFindStudentsPage(testController) {
+    await testController.click('#find-students-button');
   }
 
-  async gotoFindCompanies(testController) {
+  async gotoFindCompaniesPage(testController) {
     await testController.click('#find-companies-button');
   }
 }

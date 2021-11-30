@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 import { Student } from '../../api/student/Student';
 import StudentItem from '../components/StudentItem';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class ListStudents extends React.Component {
+class FindStudents extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
@@ -17,8 +16,8 @@ class ListStudents extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container id="list-students-page">
-        <Header as="h2" textAlign="center">List Students</Header>
+      <Container id="find-students-page">
+        <Header as="h2" textAlign="center">Find Students</Header>
         <Card.Group centered>
           {this.props.students.map((student, index) => <StudentItem
             key={index}
@@ -30,7 +29,7 @@ class ListStudents extends React.Component {
 }
 
 // Require an array of Stuff documents in the props.
-ListStudents.propTypes = {
+FindStudents.propTypes = {
   students: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -39,15 +38,12 @@ ListStudents.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Student.userPublicationName);
-  const subscription2 = Meteor.subscribe(Student.adminPublicationName);
-  const subscription3 = Meteor.subscribe(Student.recruiterPublicationName);
-  const subscription4 = Meteor.subscribe(Student.studentPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
+  const ready = subscription.ready();
   // Get the Stuff documents
   const students = Student.collection.find({}).fetch();
   return {
     students,
     ready,
   };
-})(ListStudents);
+})(FindStudents);

@@ -15,17 +15,32 @@ class NavBar extends React.Component {
         <Menu.Item id="navbar-landing" as={NavLink} activeClassName='' exact to='/'>
           <Header inverted as='h1'>Career Match</Header>
         </Menu.Item>
-        <Menu.Item id="navbar-search" as={NavLink} activeClassName='active' exact to='/search' key='search'>Search</Menu.Item>
-        <Menu.Item id="navbar-companies" as={NavLink} activeClassName='active' exact to='/companies' key='companies'>Companies</Menu.Item>
-        {Roles.userIsInRole(Meteor.userId(), 'recruiter') || Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-          <Menu.Item id="navbar-students" as={NavLink} activeClassName="active" exact to="/students" key='student'>Students</Menu.Item>
-        ) : ''}
-        {Roles.userIsInRole(Meteor.userId(), 'recruiter') ? (
-          <Menu.Item as={NavLink} activeClassName="active" exact to="/addcompanies" key='recruiter'>Add Companies</Menu.Item>
-        ) : ''}
-        {Roles.userIsInRole(Meteor.userId(), 'student') ? (
-          <Menu.Item as={NavLink} activeClassName="active" exact to="/addstudent" key='recruiter'>Add Student Profile</Menu.Item>
-        ) : ''}
+        {/** Display the Edit Profile link if logged in as a student */
+          Roles.userIsInRole(Meteor.userId(), 'student') ?
+            (<Menu.Item id="navbar-edit-profile" as={NavLink} activeClassName="active" exact to={`/edit-student-profile/${Meteor.userId()}`}>
+              Edit Profile
+            </Menu.Item>) : ''
+        }
+        {/** Display the Edit Profile link if logged in as a recruiter */
+          Roles.userIsInRole(Meteor.userId(), 'recruiter') ?
+            (<Menu.Item id="navbar-edit-profile" as={NavLink} activeClassName="active" exact to={`/edit-company-profile/${Meteor.userId()}`}>
+              Edit Profile
+            </Menu.Item>) : ''
+        }
+        {/** Display the Find Companies link if logged in as a student or admin */
+          Roles.userIsInRole(Meteor.userId(), 'student') ||
+          Roles.userIsInRole(Meteor.userId(), 'admin') ?
+            (<Menu.Item id="navbar-find-companies" as={NavLink} activeClassName="active" exact to="/find-companies">
+              Find Companies
+            </Menu.Item>) : ''
+        }
+        {/** Display the Find Students link if logged in as a recruiter or admin */
+          Roles.userIsInRole(Meteor.userId(), 'recruiter') ||
+          Roles.userIsInRole(Meteor.userId(), 'admin') ?
+            (<Menu.Item id="navbar-find-students" as={NavLink} activeClassName="active" exact to="/find-students">
+              Find Students
+            </Menu.Item>) : ''
+        }
         <Menu.Item position="right">
           {this.props.currentUser === '' ? (
             <Dropdown id="login-dropdown" text="Login" pointing="top right" icon={'user'}>

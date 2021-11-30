@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 import { Company } from '../../api/company/Company';
 import CompanyItem from '../components/CompanyItem';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class ListCompanies extends React.Component {
+class FindCompanies extends React.Component {
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
@@ -17,8 +16,8 @@ class ListCompanies extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container id="list-companies-page">
-        <Header as="h2" textAlign="center">List Companies</Header>
+      <Container id="find-companies-page">
+        <Header as="h2" textAlign="center">Find Companies</Header>
         <Card.Group centered>
           {this.props.companies.map((company, index) => <CompanyItem
             key={index}
@@ -30,7 +29,7 @@ class ListCompanies extends React.Component {
 }
 
 // Require an array of Stuff documents in the props.
-ListCompanies.propTypes = {
+FindCompanies.propTypes = {
   companies: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -39,15 +38,12 @@ ListCompanies.propTypes = {
 export default withTracker(() => {
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Company.userPublicationName);
-  const subscription2 = Meteor.subscribe(Company.adminPublicationName);
-  const subscription3 = Meteor.subscribe(Company.studentPublicationName);
-  const subscription4 = Meteor.subscribe(Company.recruiterPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
+  const ready = subscription.ready();
   // Get the Stuff documents
   const companies = Company.collection.find({}).fetch();
   return {
     companies,
     ready,
   };
-})(ListCompanies);
+})(FindCompanies);

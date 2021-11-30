@@ -1,16 +1,21 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { Company } from '../../api/company/Company';
 import { Student } from '../../api/student/Student';
 /* eslint-disable no-console */
 
 function addCompany(data) {
-  console.log(`  Adding: ${data.company} (${data.owner})`);
-  Company.collection.insert(data);
+  const doc = data;
+  doc._id = Accounts.findUserByUsername(data.owner)._id;
+  console.log(`  Adding: ${data.name} (${data.owner}:${doc._id})`);
+  Company.collection.insert(doc);
 }
 
 function addStudent(data) {
-  console.log(`  Adding: ${data.name} (${data.owner})`);
-  Student.collection.insert(data);
+  const doc = data;
+  doc._id = Accounts.findUserByUsername(data.owner)._id;
+  console.log(`  Adding: ${data.name} (${data.owner}:${doc._id})`);
+  Student.collection.insert(doc);
 }
 
 if (Company.collection.find().count() === 0) {
