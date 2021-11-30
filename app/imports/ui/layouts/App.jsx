@@ -7,16 +7,17 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListCompanies from '../pages/ListCompanies';
-import ListStudents from '../pages/ListStudents';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
-import Search from '../pages/Search';
 import AdminHome from '../pages/AdminHome';
-import StudentHome from '../pages/StudentHome';
 import CompanyHome from '../pages/CompanyHome';
+import StudentHome from '../pages/StudentHome';
+import FindCompanies from '../pages/FindCompanies';
+import FindStudents from '../pages/FindStudents';
+import EditStudentProfile from '../pages/EditStudentProfile';
+import EditCompanyProfile from '../pages/EditCompanyProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -30,12 +31,13 @@ class App extends React.Component {
             <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
-            <Route path="/search" component={Search}/>
-            <Route path="/companies" component={ListCompanies}/>
+            <RecruiterProtectedRoute path="/edit-company-profile/:_id" component={EditCompanyProfile}/>
+            <StudentProtectedRoute path="/edit-student-profile/:_id" component={EditStudentProfile}/>
             <StudentProtectedRoute path="/student" component={StudentHome}/>
-            <CompanyProtectedRoute path="/company" component={CompanyHome}/>
-            <CompanyProtectedRoute path="/students" component={ListStudents}/>
+            <RecruiterProtectedRoute path="/company" component={CompanyHome}/>
             <AdminProtectedRoute path="/admin" component={AdminHome}/>
+            <StudentProtectedRoute path="/find-companies" component={FindCompanies}/>
+            <RecruiterProtectedRoute path="/find-students" component={FindStudents}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>
@@ -56,7 +58,7 @@ const HomeRoute = ({ component: Component, ...rest }) => (
     render={(props) => {
       const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
       const isStudent = Roles.userIsInRole(Meteor.userId(), 'student');
-      const isCompany = Roles.userIsInRole(Meteor.userId(), 'company');
+      const isCompany = Roles.userIsInRole(Meteor.userId(), 'recruiter');
       if (isAdmin) return (<Redirect to={{ pathname: '/admin', state: { from: props.location } } }/>);
       if (isStudent) return (<Redirect to={{ pathname: '/student', state: { from: props.location } } }/>);
       if (isCompany) return (<Redirect to={{ pathname: '/company', state: { from: props.location } } }/>);
@@ -104,20 +106,14 @@ const StudentProtectedRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-/**
- * CompanyProtectedRoute (see React Router v4 sample)
- * Checks for Meteor login and student role before routing to the requested page, otherwise goes to signin page.
- * Admin is also allowed access.
- * @param {any} { component: Component, ...rest }
- */
-const CompanyProtectedRoute = ({ component: Component, ...rest }) => (
+const RecruiterProtectedRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) => {
       const isLogged = Meteor.userId() !== null;
-      const isCompany = Roles.userIsInRole(Meteor.userId(), 'company');
+      const isRecruiter = Roles.userIsInRole(Meteor.userId(), 'recruiter');
       const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
-      return (isLogged && (isCompany || isAdmin)) ?
+      return (isLogged && (isRecruiter || isAdmin)) ?
         (<Component {...props} />) :
         (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
         );
@@ -154,17 +150,20 @@ ProtectedRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
 };
-StudentProtectedRoute.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-  location: PropTypes.object,
-};
-CompanyProtectedRoute.propTypes = {
+
+// Require a component and location to be passed to each AdminProtectedRoute.
+AdminProtectedRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
 };
 
 // Require a component and location to be passed to each AdminProtectedRoute.
-AdminProtectedRoute.propTypes = {
+RecruiterProtectedRoute.propTypes = {
+  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  location: PropTypes.object,
+};
+
+StudentProtectedRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
 };
