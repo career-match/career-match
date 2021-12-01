@@ -21,4 +21,4 @@ class InterestsCollection {
   }
 }
 
-export const Interest = new InterestsCollection();
+export const Interests = new InterestsCollection();

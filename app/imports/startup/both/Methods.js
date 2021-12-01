@@ -4,22 +4,22 @@ import { Student } from '../../api/student/Student';
 import { Company } from '../../api/company/Company';
 
 const addRoleMethod = 'Roles.add';
-const newAccount = 'Account.add';
+// const newAccount = 'Account.add';
 
-const defaultStudent = { name: 'Enter name here',
-  address: 'Enter address here',
-  phone: 'Enter phone number here',
-  description: 'Describe yourself here',
-  image: 'Add a link to an image of you here',
-  owner: '',
-  interest: '' };
-const defaultCompany = { name: 'Enter name here',
-  address: 'Enter address here',
-  phone: 'Enter phone number here',
-  description: 'Describe your company here',
-  image: 'Add a link to your company logo here',
-  owner: '',
-  interest: '' };
+// const defaultStudent = { name: 'Enter name here',
+//   address: 'Enter address here',
+//   phone: 'Enter phone number here',
+//   description: 'Describe yourself here',
+//   image: 'Add a link to an image of you here',
+//   owner: '',
+//   interest: '' };
+// const defaultCompany = { name: 'Enter name here',
+//   address: 'Enter address here',
+//   phone: 'Enter phone number here',
+//   description: 'Describe your company here',
+//   image: 'Add a link to your company logo here',
+//   owner: '',
+//   interest: '' };
 
 Meteor.methods({
   'Roles.add'({ role }) {
@@ -34,16 +34,16 @@ Meteor.methods({
     }
   },
 
-  'Account.add'({ role, email }) {
-    if (role === 'student') {
-      defaultStudent.owner = email;
-      Student.collection.insert(defaultStudent);
-    }
-    if (role === 'company') {
-      defaultCompany.owner = email;
-      Company.collection.insert(defaultCompany);
-    }
-  },
+//   'Account.add'({ role, email }) {
+//     if (role === 'student') {
+//       defaultStudent.owner = email;
+//       Student.collection.insert(defaultStudent);
+//     }
+//     if (role === 'company') {
+//       defaultCompany.owner = email;
+//       Company.collection.insert(defaultCompany);
+//     }
+//   },
 });
 
-export { addRoleMethod, newAccount };
+export { addRoleMethod };

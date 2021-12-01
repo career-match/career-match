@@ -11,8 +11,8 @@ class CompanyInterestCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      company: String,
-      interest: { type: String, optional: true },
+      name: String,
+      interests: { type: String, optional: true },
     }, { tracker: Tracker });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);

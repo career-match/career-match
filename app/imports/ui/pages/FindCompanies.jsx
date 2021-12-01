@@ -8,12 +8,11 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Company } from '../../api/company/Company';
-import { Interest } from '../../api/interest/Interest';
+import { Interests } from '../../api/interests/Interests';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
 import { Address } from '../../api/address/Address';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
-import StudentItem from '../components/StudentItem';
 import CompanyItem from '../components/CompanyItem';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
@@ -72,7 +71,7 @@ class FindCompanies extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const allInterests = _.pluck(Interest.collection.find().fetch(), 'name');
+    const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allInterests);
     const bridge = new SimpleSchema2Bridge(formSchema);
     const emails = _.pluck(CompanyInterest.collection.find({ interest: { $in: this.state.interest } }).fetch(), 'company');
