@@ -14,7 +14,6 @@ class CompanyCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       name: { type: String, index: true, unique: true },
-      address: { type: String, optional: true },
       phone: { type: String, optional: true },
       description: { type: String, optional: true },
       image: { type: String, optional: true },
