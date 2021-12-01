@@ -6,18 +6,18 @@ import { Company } from '../../api/company/Company';
 const addRoleMethod = 'Roles.add';
 const newAccount = 'Account.add';
 
-const defaultStudent = { name: 'Enter name here',
-  address: 'Enter address here',
-  phone: 'Enter phone number here',
-  description: 'Describe yourself here',
-  image: 'Add a link to an image of you here',
+const defaultStudent = { name: 'Name',
+  address: 'Address',
+  phone: 'Phone Number',
+  description: 'Description',
+  image: 'http://cdn.onlinewebfonts.com/svg/img_87237.svg',
   owner: '',
   interest: '' };
-const defaultCompany = { name: 'Enter name here',
-  address: 'Enter address here',
-  phone: 'Enter phone number here',
-  description: 'Describe your company here',
-  image: 'Add a link to your company logo here',
+const defaultCompany = { name: 'Name',
+  address: 'Address',
+  phone: 'Phone Number',
+  description: 'Description',
+  image: 'http://cdn.onlinewebfonts.com/svg/img_87237.svg',
   owner: '',
   interest: '' };
 
@@ -37,10 +37,12 @@ Meteor.methods({
   'Account.add'({ role, email }) {
     if (role === 'student') {
       defaultStudent.owner = email;
+      defaultStudent._id = Meteor.userId();
       Student.collection.insert(defaultStudent);
     }
     if (role === 'company') {
       defaultCompany.owner = email;
+      defaultCompany._id = Meteor.userId();
       Company.collection.insert(defaultCompany);
     }
   },
