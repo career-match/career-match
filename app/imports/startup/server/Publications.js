@@ -2,6 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Company } from '../../api/company/Company';
 import { Student } from '../../api/student/Student';
+import { CompanyAddress } from '../../api/company/CompanyAddress';
+import { CompanyInterest } from '../../api/company/CompanyInterest';
+import { Interest } from '../../api/interest/Interest';
+import { Address } from '../../api/address/Address';
+import { StudentAddress } from '../../api/student/StudentAddress';
+import { StudentInterest } from '../../api/student/StudentInterest';
 
 // Simplified Company publication.
 // If logged in as student or admin, then publish all documents.
@@ -41,3 +47,10 @@ Meteor.publish(null, function () {
   }
   return this.ready();
 });
+
+Meteor.publish(Interest.userPublicationName, () => Interest.collection.find());
+Meteor.publish(Address.userPublicationName, () => Address.collection.find());
+Meteor.publish(CompanyAddress.userPublicationName, () => CompanyAddress.collection.find());
+Meteor.publish(CompanyInterest.userPublicationName, () => CompanyInterest.collection.find());
+Meteor.publish(StudentAddress.userPublicationName, () => StudentAddress.collection.find());
+Meteor.publish(StudentInterest.userPublicationName, () => StudentInterest.collection.find());
