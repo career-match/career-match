@@ -11,7 +11,7 @@ class CompanyAddressCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      company: String,
+      name: String,
       address: { type: String, optional: true },
     }, { tracker: Tracker });
     // Ensure collection documents obey schema.

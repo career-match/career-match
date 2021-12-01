@@ -8,7 +8,9 @@
   "defaultCompany": [
     {
       "name": "Apple",
-      "address": "One Apple Park Way, Cupertino, CA 95014",
+      "address": [
+        "One Apple Park Way, Cupertino, CA"
+      ],
       "phone": "(800)692–7753",
       "interests": [
         "Software Engineering",
@@ -21,7 +23,9 @@
     },
     {
       "name": "Intel",
-      "address": "2200 Mission College Blvd., Santa Clara, CA",
+      "address": [
+        "2200 Mission College Blvd., Santa Clara, CA"
+      ],
       "phone": "(408)765-8080",
       "interests": [
         "Python",
@@ -36,7 +40,9 @@
   "defaultStudent": [
     {
       "name": "John Doe",
-      "address": "2569 Dole St, Honolulu, HI 96822",
+      "address": [
+        "2569 Dole St, Honolulu, HI"
+      ],
       "phone": "(808)808-8080",
       "description": "UH Manoa Student",
       "interests": [
@@ -49,7 +55,9 @@
     },
     {
       "name": "Jo Kim",
-      "address": "2569 Dole St, Honolulu, HI 96822",
+      "address": [
+        "2569 Dole St, Honolulu, HI"
+      ],
       "phone": "(808)808-8080",
       "description": "UH Manoa Student",
       "interests": [
@@ -60,6 +68,5 @@
       "email": "jo@foo.com",
       "role": "student"
     }
-  ],
-  "loadAssetsFile":  false
+    ]
 }
