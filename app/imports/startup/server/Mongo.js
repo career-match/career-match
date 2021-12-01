@@ -27,6 +27,7 @@ function createUser(email, password, role) {
     Roles.addUsersToRoles(userID, 'student');
   }
 }
+
 /** Define an interest.  Has no effect if interest already exists. */
 function addInterest(interest) {
   Interests.collection.update({ name: interest }, { $set: { name: interest } }, { upsert: true });
