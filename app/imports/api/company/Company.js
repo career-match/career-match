@@ -3,23 +3,26 @@ import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
 /**
- * The StuffsCollection. It encapsulates state and variable values for stuff.
+ * The CompanyCollection. It encapsulates state and variable values for stuff.
  */
-class StuffsCollection {
+class CompanyCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'StuffsCollection';
+    this.name = 'CompanyCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      name: String,
-      quantity: Number,
+      company: String,
+      address: String,
+      phone: String,
+      description: String,
+      image: String,
       owner: String,
-      condition: {
+      interest: {
         type: String,
-        allowedValues: ['excellent', 'good', 'fair', 'poor'],
-        defaultValue: 'good',
+        allowedValues: ['css', 'design', 'html', 'ia', 'javascript', 'meteor', 'node', 'python', 'react', 'ruby', 'ui'],
+        defaultValue: 'css',
       },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
@@ -27,11 +30,13 @@ class StuffsCollection {
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
     this.adminPublicationName = `${this.name}.publication.admin`;
+    this.studentPublicationName = `${this.name}.publication.student`;
+    this.recruiterPublicationName = `${this.name}.publication.recruiter`;
   }
 }
 
 /**
- * The singleton instance of the StuffsCollection.
- * @type {StuffsCollection}
+ * The singleton instance of the CompanyCollection.
+ * @type {CompanyCollection}
  */
-export const Stuffs = new StuffsCollection();
+export const Company = new CompanyCollection();
