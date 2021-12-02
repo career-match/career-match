@@ -1,17 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
-import { Company } from '../../api/company/Company';
-import { Student } from '../../api/student/Student';
 import { Interests } from '../../api/interests/Interests';
 import { Address } from '../../api/address/Address';
+import { Company } from '../../api/company/Company';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
+import { Student } from '../../api/student/Student';
 import { StudentInterest } from '../../api/student/StudentInterest';
 import { StudentAddress } from '../../api/student/StudentAddress';
 
 /* eslint-disable no-console */
-function createUser(email, password, role) {
+function createUser(email, role) {
   console.log(`  Creating user ${email} as ${role} user.`);
   const userID = Accounts.createUser({ username: email, email, password: 'foo' });
   if (role === 'admin') {
@@ -44,10 +44,10 @@ function addCompany({ name, address, phone, interests, description, image, role,
   createUser(email, role);
   // Define the user in the Meteor accounts package.
   // Create the profile.
-  Company.collection.insert({ name, address, phone, description, image, email, role });
+  Company.collection.insert({ name, phone, description, image, email, role });
   // Add interests and projects.
-  interests.map(interest => CompanyInterest.collection.insert({ companies: email, interest }));
-  address.map(addresses => CompanyAddress.collection.insert({ company: email, addresses }));
+  interests.map(interest => CompanyInterest.collection.insert({ name: email, interest }));
+  address.map(addresses => CompanyAddress.collection.insert({ name: email, addresses }));
   // Make sure interests are defined in the Interests collection if they weren't already.
   interests.map(interest => addInterest(interest));
   address.map(addresses => addAddress(addresses));
@@ -59,10 +59,10 @@ function addStudent({ name, address, phone, interests, description, image, role,
   createUser(email, role);
   // Define the user in the Meteor accounts package.
   // Create the profile.
-  Student.collection.insert({ name, address, phone, description, image, email, role });
+  Student.collection.insert({ name, phone, description, image, email, role });
   // Add interests and projects.
-  interests.map(interest => StudentInterest.collection.insert({ student: email, interest }));
-  address.map(addresses => StudentAddress.collection.insert({ student: email, addresses }));
+  interests.map(interest => StudentInterest.collection.insert({ name: email, interest }));
+  address.map(addresses => StudentAddress.collection.insert({ name: email, addresses }));
   // Make sure interests are defined in the Interests collection if they weren't already.
   interests.map(interest => addInterest(interest));
   address.map(addresses => addAddress(addresses));
