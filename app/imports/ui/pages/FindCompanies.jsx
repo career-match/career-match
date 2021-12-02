@@ -12,6 +12,8 @@ import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
 import { Address } from '../../api/address/Address';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
+import { Interests } from '../../api/interests/Interests';
+import { Student } from '../../api/student/Student';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const makeSchema = (allInterests) => new SimpleSchema({
@@ -116,8 +118,10 @@ export default withTracker(() => {
   const subscription2 = Meteor.subscribe(CompanyAddress.userPublicationName);
   const subscription3 = Meteor.subscribe(CompanyInterest.userPublicationName);
   const subscription4 = Meteor.subscribe(Address.userPublicationName);
+  const subscription5 = Meteor.subscribe(Student.userPublicationName);
+  const subscription6 = Meteor.subscribe(Interests.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription5.ready() && subscription6.ready();
   // Get the Stuff documents
   const companies = Company.collection.find({}).fetch();
   return {
