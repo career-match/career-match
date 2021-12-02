@@ -49,7 +49,7 @@
       "name": "Google",
       "address": "Google Inc. 1600 Amphitheatre Pkwy. Mountain View, CA 94043",
       "phone": "1-650-253-0000",
-      "condition": "cybersecurity",
+      "condition": "python",
       "description": "Our mission is to organize the world’s information and make it universally accessible and useful. We are committed to significantly improving the lives of as many people as possible. We are building a world where progress, equitable outcomes, diversity, and inclusion can be realities both inside and outside our workplace.",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png",
       "owner": "google@foo.com"
@@ -64,31 +64,31 @@
       "owner": "microsoft@foo.com"
     },
     {
-      "name": "",
-      "address": "",
-      "phone": "",
-      "condition": "",
-      "description": "",
-      "image": "",
-      "owner": ""
+      "name": "Dell",
+      "address": "Dell Inc. 1 Dell Way, Round Rock, TX 78682",
+      "phone": "1-800-289-3355",
+      "condition": "ruby",
+      "description": "Our story began with a belief and a passion: that everybody should have easy access to the best technology anywhere in the world. We are among the world’s leading technology companies helping to transform people’s lives with extraordinary capabilities.",
+      "image": "https://www.headquartersinfo.com/images/logos/dell-logo.gif",
+      "owner": "dell@foo.com"
     },
     {
-      "name": "",
-      "address": "",
-      "phone": "",
-      "condition": "",
-      "description": "",
-      "image": "",
-      "owner": ""
+      "name": "Hawaiian Airlines",
+      "address": "Hawaiian Airlines, P.O. Box 30008, Honolulu, HI 96820",
+      "phone": "1-800-367-5320",
+      "condition": "ui",
+      "description": "Hawaiian Airlines, Hawaii's largest and longest-serving airline, is looking for exceptional people. People with experience. People with ambition. People who love Hawaii.",
+      "image": "https://css.s-hawaiianairlines.com/Content/assets/images/logos/ha-logo-stacked.png",
+      "owner": "hawaiiair@foo.com"
     },
     {
-      "name": "",
-      "address": "",
-      "phone": "",
-      "condition": "",
-      "description": "",
-      "image": "",
-      "owner": ""
+      "name": "Hawaiian Electric",
+      "address": "1001 Bishop Street, Honolulu, HI 96813",
+      "phone": "(808) 548-7311",
+      "condition": "ui",
+      "description": "Established in 1891, Hawaiian Electric is committed to empowering its customers and communities by providing affordable, reliable, clean and sustainable energy.",
+      "image": "https://www.udcus.com/sites/default/files/assets/client-logos/logo-hawaiian-electric.jpg",
+      "owner": "hawaiielectric@foo.com"
     },
     {
       "name": "",
