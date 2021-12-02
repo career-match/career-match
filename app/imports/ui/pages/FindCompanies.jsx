@@ -77,10 +77,6 @@ class FindCompanies extends React.Component {
     const bridge = new SimpleSchema2Bridge(formSchema);
     const interestNames = _.pluck(CompanyInterest.collection.find({ interest: { $in: this.state.interest } }).fetch(), 'interest');
     const companyData = _.uniq(interestNames).map(name => getCompanyData(name));
-    const companyData2 = _.filter(companyData, function (companyprofile) {
-      console.log(companyprofile);
-      return companyprofile.role === 'company';
-    });
     return (
       <Container id="filter-page">
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)} >
@@ -90,7 +86,7 @@ class FindCompanies extends React.Component {
           </Segment>
         </AutoForm>
         <Card.Group style={{ paddingTop: '10px' }}>
-          {_.map(companyData2, (name, index) => <MakeCard key={index} name={name}/>)}
+          {_.map(companyData, (name, index) => <MakeCard key={index} name={name}/>)}
         </Card.Group>
         <Container id="find-students-page">
           <Header as="h2" textAlign="center">Find Companies</Header>
