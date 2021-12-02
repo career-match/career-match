@@ -8,7 +8,6 @@ import { adminHomePage } from './adminhome.page';
 import { signupPage } from './signup.page';
 import { findCompaniesPage } from './findcompanies.page';
 import { editStudentProfilePage } from './editstudentprofile.page';
-import { editCompanyProfilePage } from './editcompanyprofile.page';
 import { findStudentsPage } from './findstudents.page';
 
 /* global fixture:false, test:false */
