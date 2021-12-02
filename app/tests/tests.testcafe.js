@@ -76,10 +76,6 @@ test('Test pages accessible to admin', async (testController) => {
   await findCompaniesPage.isDisplayed(testController);
   await navBar.gotoFindStudentsPage(testController);
   await findStudentsPage.isDisplayed(testController);
-  await navBar.gotoStudentProfilePage(testController);
-  await findStudentsPage.isDisplayed(testController);
-  await navBar.gotoCompanyProfilePage(testController);
-  await findCompaniesPage.isDisplayed(testController);
 
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
