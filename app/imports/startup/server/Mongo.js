@@ -29,8 +29,8 @@ function createUser(email, password, role) {
 }
 
 /** Define an interest.  Has no effect if interest already exists. */
-function addInterest(interest) {
-  Interests.collection.update({ name: interest }, { $set: { name: interest } }, { upsert: true });
+function addInterest(interests) {
+  Interests.collection.update({ name: interests }, { $set: { name: interests } }, { upsert: true });
 }
 
 /** Define an interest.  Has no effect if interest already exists. */
@@ -44,7 +44,7 @@ function addCompany({ name, address, phone, interests, description, image, role,
   createUser(email, role);
   // Define the user in the Meteor accounts package.
   // Create the profile.
-  Company.collection.insert({ name, address, phone, description, image, email });
+  Company.collection.insert({ name, address, phone, description, image, email, role });
   // Add interests and projects.
   interests.map(interest => CompanyInterest.collection.insert({ companies: email, interest }));
   address.map(addresses => CompanyAddress.collection.insert({ company: email, addresses }));
@@ -59,7 +59,7 @@ function addStudent({ name, address, phone, interests, description, image, role,
   createUser(email, role);
   // Define the user in the Meteor accounts package.
   // Create the profile.
-  Student.collection.insert({ name, address, phone, description, image, email });
+  Student.collection.insert({ name, address, phone, description, image, email, role });
   // Add interests and projects.
   interests.map(interest => StudentInterest.collection.insert({ student: email, interest }));
   address.map(addresses => StudentAddress.collection.insert({ student: email, addresses }));
