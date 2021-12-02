@@ -14,6 +14,7 @@ import { Address } from '../../api/address/Address';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Interests } from '../../api/interests/Interests';
 import { Student } from '../../api/student/Student';
+import CompanyItem from '../components/CompanyItem';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const makeSchema = (allInterests) => new SimpleSchema({
@@ -21,31 +22,30 @@ const makeSchema = (allInterests) => new SimpleSchema({
   'interest.$': { type: String, allowedValues: allInterests },
 });
 
-function getCompanyData(name) {
-  const data = Company.collection.findOne({ name });
-  console.log(data);
-  const interests = _.pluck(CompanyInterest.collection.find({ name: name }).fetch(), 'interest');
-  const addresses = _.pluck(CompanyAddress.collection.find({ name: name }).fetch(), 'addresses');
-  return _.extend({ }, data, { interests, addresses });
+function getCompanyData(email) {
+  const data = Company.collection.findOne({ email });
+  const interests = _.pluck(CompanyInterest.collection.find({ name: email }).fetch(), 'interest');
+  const addresses = _.pluck(CompanyAddress.collection.find({ name: email }).fetch(), 'addresses');
+  return _.extend({}, data, { interests, addresses });
 }
 
 /** Component for layout out a Profile Card. */
 const MakeCard = (props) => (
   <Card>
     <Card.Content>
-      <Image floated='right' size='mini' src={props.company.image} />
+      <Image floated='right' size='mini' src={props.company.image}/>
       <Card.Header>{props.company.name}</Card.Header>
       <Card.Description>
         {props.company.description}
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
-      {_.map(props.company.interest,
+      {_.map(props.company.interests,
         (interest, index) => <Label key={index} size='tiny'>{interest}</Label>)}
     </Card.Content>
     <Card.Content extra>
       <Header as='h5'>Address</Header>
-      {_.map(props.company.addresses, (address, index) => <Image key={index} size='mini' src={address}/>)}
+      {_.map(props.company.addresses, (addresses, index) => <Label key={index} size='tiny'>{addresses}</Label>)}
     </Card.Content>
   </Card>
 );
@@ -75,25 +75,26 @@ class FindCompanies extends React.Component {
     const allInterests = _.pluck(CompanyInterest.collection.find().fetch(), 'interest');
     const formSchema = makeSchema(allInterests);
     const bridge = new SimpleSchema2Bridge(formSchema);
-    const interestNames = _.pluck(CompanyInterest.collection.find({ interest: { $in: this.state.interest } }).fetch(), 'interest');
+    const interestNames = _.pluck(CompanyInterest.collection.find({ interest: { $in: this.state.interest } }).fetch(), 'name');
     const companyData = _.uniq(interestNames).map(name => getCompanyData(name));
     return (
       <Container id="filter-page">
-        <AutoForm schema={bridge} onSubmit={data => this.submit(data)} >
+        <Header as="h2" textAlign="center">Find Companies</Header>
+        <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>
             <MultiSelectField id='interest' name='interest' showInlineError={true} placeholder={'Interest'}/>
             <SubmitField id='submit' value='Submit'/>
           </Segment>
         </AutoForm>
         <Card.Group style={{ paddingTop: '10px' }}>
-          {_.map(companyData, (name, index) => <MakeCard key={index} name={name}/>)}
+          {_.map(companyData, (company, index) => <MakeCard key={index} company={company}/>)}
         </Card.Group>
         <Container id="find-students-page">
-          <Header as="h2" textAlign="center">Find Companies</Header>
+          <Header as="h2" textAlign="center"> List of Companies</Header>
           <Card.Group centered>
             {this.props.companies.map((company, index) => <MakeCard
               key={index}
-              company={company} />)}
+              company={company}/>)}
           </Card.Group>
         </Container>
       </Container>

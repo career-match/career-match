@@ -1,7 +1,8 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Card, Image, Button } from 'semantic-ui-react';
+import { _ } from 'meteor/underscore';
+import { Card, Image, Button, Label, Header } from 'semantic-ui-react';
 import { withRouter, Link } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 
@@ -11,20 +12,19 @@ class CompanyItem extends React.Component {
     return (
       <Card>
         <Card.Content>
-          <Image
-            floated='left'
-            size='small'
-            src={this.props.company.image}
-          />
+          <Image floated='right' size='mini' src={this.props.company.image}/>
           <Card.Header>{this.props.company.name}</Card.Header>
-          <Card.Meta>{this.props.company.address}</Card.Meta>
-          <Card.Meta>{this.props.company.phone}</Card.Meta>
           <Card.Description>
             {this.props.company.description}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <p>Looking for students who are experienced in: {this.props.company.interest}</p>
+          {_.map(this.props.company.interests,
+            (interest, index) => <Label key={index} size='tiny'>{interest}</Label>)}
+        </Card.Content>
+        <Card.Content extra>
+          <Header as='h5'>Address</Header>
+          {_.map(this.props.company.addresses, (addresses, index) => <Label key={index} size='tiny'>{addresses}</Label>)}
         </Card.Content>
         {/** Display the Edit link only if logged in as admin */
           Roles.userIsInRole(Meteor.userId(), 'admin') ||
@@ -44,15 +44,7 @@ class CompanyItem extends React.Component {
 
 // Require a document to be passed to this component.
 CompanyItem.propTypes = {
-  company: PropTypes.shape({
-    name: PropTypes.string,
-    address: PropTypes.string,
-    phone: PropTypes.string,
-    _id: PropTypes.string,
-    description: PropTypes.string,
-    interest: PropTypes.string,
-    image: PropTypes.string,
-  }).isRequired,
+  company: PropTypes.object.isRequired,
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
