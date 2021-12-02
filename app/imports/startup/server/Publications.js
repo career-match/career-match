@@ -14,28 +14,8 @@ Meteor.publish(CompanyAddress.userPublicationName, () => CompanyAddress.collecti
 Meteor.publish(CompanyInterest.userPublicationName, () => CompanyInterest.collection.find());
 Meteor.publish(StudentAddress.userPublicationName, () => StudentAddress.collection.find());
 Meteor.publish(StudentInterest.userPublicationName, () => StudentInterest.collection.find());
-
-// Simplified Company publication.
-// If logged in as student or admin, then publish all documents.
-// Otherwise publish only profile owned by this user.
-Meteor.publish(Company.userPublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Company.collection.find({ owner: username });
-  }
-  return this.ready();
-});
-
-// Simplified Student publication.
-// If logged in as student or admin, then publish all documents.
-// Otherwise publish only profile owned by this user.
-Meteor.publish(Student.userPublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Student.collection.find({ owner: username });
-  }
-  return this.ready();
-});
+Meteor.publish(Company.userPublicationName, () => Company.collection.find());
+Meteor.publish(Student.userPublicationName, () => Student.collection.find());
 
 // alanning:roles publication
 // Recommended code to publish roles for each user.
