@@ -44,7 +44,7 @@ function addCompany({ name, address, phone, interests, description, image, role,
   createUser(email, role);
   // Define the user in the Meteor accounts package.
   // Create the profile.
-  Company.collection.insert({ name, address, phone, description, image, email });
+  Company.collection.insert({ name, phone, description, image, email });
   // Add interests and projects.
   interests.map(interest => CompanyInterest.collection.insert({ name: email, interest }));
   address.map(addresses => CompanyAddress.collection.insert({ name: email, addresses }));
@@ -59,7 +59,7 @@ function addStudent({ name, address, phone, interests, description, image, role,
   createUser(email, role);
   // Define the user in the Meteor accounts package.
   // Create the profile.
-  Student.collection.insert({ name, address, phone, description, image, email });
+  Student.collection.insert({ name, phone, description, image, email });
   // Add interests and projects.
   interests.map(interest => StudentInterest.collection.insert({ name: email, interest }));
   address.map(addresses => StudentAddress.collection.insert({ name: email, addresses }));
@@ -70,7 +70,9 @@ function addStudent({ name, address, phone, interests, description, image, role,
 
 /** Initialize DB if it appears to be empty (i.e. no users defined.) */
 if (Meteor.users.find().count() === 0) {
-  if (Meteor.settings.defaultCompany && Meteor.settings.defaultStudent) {
+  if (Meteor.settings.defaultCompany && Meteor.settings.defaultStudent && Meteor.settings.defaultAccounts) {
+    console.log('Creating the default user(s)');
+    Meteor.settings.defaultAccounts.map(({ email, role }) => createUser(email, role));
     console.log('Creating the default company');
     Meteor.settings.defaultCompany.map(company => addCompany(company));
     console.log('Creating the default student');

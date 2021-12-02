@@ -8,12 +8,10 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Company } from '../../api/company/Company';
-import { Interests } from '../../api/interests/Interests';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
 import { Address } from '../../api/address/Address';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
-import CompanyItem from '../components/CompanyItem';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const makeSchema = (allInterests) => new SimpleSchema({
@@ -21,10 +19,11 @@ const makeSchema = (allInterests) => new SimpleSchema({
   'interest.$': { type: String, allowedValues: allInterests },
 });
 
-function getCompanyData(email) {
-  const data = Company.collection.findOne({ email });
-  const interests = _.pluck(CompanyInterest.collection.find({ profile: email }).fetch(), 'interest');
-  const addresses = _.pluck(CompanyAddress.collection.find({ profile: email }).fetch(), 'addresses');
+function getCompanyData(name) {
+  const data = Company.collection.findOne({ name });
+  console.log(data);
+  const interests = _.pluck(CompanyInterest.collection.find({ name: name }).fetch(), 'interest');
+  const addresses = _.pluck(CompanyAddress.collection.find({ name: name }).fetch(), 'addresses');
   return _.extend({ }, data, { interests, addresses });
 }
 
@@ -40,11 +39,11 @@ const MakeCard = (props) => (
     </Card.Content>
     <Card.Content extra>
       {_.map(props.company.interest,
-        (interest, index) => <Label key={index} size='tiny' color='teal'>{interest}</Label>)}
+        (interest, index) => <Label key={index} size='tiny'>{interest}</Label>)}
     </Card.Content>
     <Card.Content extra>
       <Header as='h5'>Address</Header>
-      {_.map(props.company.address, (address, index) => <Image key={index} size='mini' src={address}/>)}
+      {_.map(props.company.addresses, (address, index) => <Image key={index} size='mini' src={address}/>)}
     </Card.Content>
   </Card>
 );
@@ -71,14 +70,14 @@ class FindCompanies extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
+    const allInterests = _.pluck(CompanyInterest.collection.find().fetch(), 'interest');
     const formSchema = makeSchema(allInterests);
     const bridge = new SimpleSchema2Bridge(formSchema);
-    const emails = _.pluck(CompanyInterest.collection.find({ interest: { $in: this.state.interest } }).fetch(), 'company');
-    const profileData = _.uniq(emails).map(email => getCompanyData(email));
-    const companyData = _.filter(profileData, function (oneprofile) {
-      console.log(oneprofile);
-      return oneprofile.role === 'company';
+    const interestNames = _.pluck(CompanyInterest.collection.find({ interest: { $in: this.state.interest } }).fetch(), 'interest');
+    const companyData = _.uniq(interestNames).map(name => getCompanyData(name));
+    const companyData2 = _.filter(companyData, function (companyprofile) {
+      console.log(companyprofile);
+      return companyprofile.role === 'company';
     });
     return (
       <Container id="filter-page">
@@ -89,12 +88,12 @@ class FindCompanies extends React.Component {
           </Segment>
         </AutoForm>
         <Card.Group style={{ paddingTop: '10px' }}>
-          {_.map(companyData, (profile, index) => <MakeCard key={index} profile={profile}/>)}
+          {_.map(companyData2, (name, index) => <MakeCard key={index} name={name}/>)}
         </Card.Group>
         <Container id="find-students-page">
-          <Header as="h2" textAlign="center">Find Students</Header>
+          <Header as="h2" textAlign="center">Find Companies</Header>
           <Card.Group centered>
-            {this.props.companies.map((company, index) => <CompanyItem
+            {this.props.companies.map((company, index) => <MakeCard
               key={index}
               company={company} />)}
           </Card.Group>
