@@ -56,6 +56,8 @@ class CompanyProfile extends React.Component {
   renderPage() {
     const companyEmails = _.pluck(Company.collection.find().fetch(), 'email');
     const companyProfiles = companyEmails.map(name => getCompanyData(name));
+    //const email = Meteor.user().username;
+    //const profileData = getCompanyData(email);
     return (
       <Container id="find-students-page">
         <Header as="h2" textAlign="center"> List of Companies</Header>
