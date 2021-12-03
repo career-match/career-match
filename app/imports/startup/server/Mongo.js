@@ -49,6 +49,7 @@ function addCompany({ name, address, phone, interests, description, image, role,
   interests.map(interest => CompanyInterest.collection.insert({ name: email, interest }));
   address.map(addresses => CompanyAddress.collection.insert({ name: email, addresses }));
   // Make sure interests are defined in the Interests collection if they weren't already.
+  console.log(address);
   interests.map(interest => addInterest(interest));
   address.map(addresses => addAddress(addresses));
 }

@@ -9,7 +9,8 @@
     {
       "name": "Apple",
       "address": [
-        "One Apple Park Way, Cupertino, CA"
+        "CA",
+        "USA"
       ],
       "phone": "(800)692–7753",
       "interests": [
@@ -24,7 +25,8 @@
     {
       "name": "Intel",
       "address": [
-        "2200 Mission College Blvd., Santa Clara, CA"
+        "CA",
+        "USA"
       ],
       "phone": "(408)765-8080",
       "interests": [
@@ -41,13 +43,14 @@
     {
       "name": "John Doe",
       "address": [
-        "2569 Dole St, Honolulu, HI"
+        "HI",
+        "USA"
       ],
       "phone": "(808)808-8080",
       "description": "UH Manoa Student",
       "interests": [
         "CSS",
-        "Javascript"
+        "JavaScript"
       ],
       "image": "https://www.clipartmax.com/png/middle/427-4272664_intermediate-student-profile-logo.png",
       "email": "john@foo.com",
@@ -56,7 +59,8 @@
     {
       "name": "Jo Kim",
       "address": [
-        "2569 Dole St, Honolulu, HI"
+        "HI",
+        "USA"
       ],
       "phone": "(808)808-8080",
       "description": "UH Manoa Student",

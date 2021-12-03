@@ -2,9 +2,22 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Student } from '../../api/student/Student';
 import { Company } from '../../api/company/Company';
+import { CompanyInterest } from '../../api/company/CompanyInterest';
+import { CompanyAddress } from '../../api/company/CompanyAddress';
 
 const addRoleMethod = 'Roles.add';
 const newAccount = 'Account.add';
+const updateCompanyMethod = 'Company.update';
+
+Meteor.methods({
+  'Company.update'({ name, address, phone, interests, description, image, role, email }) {
+    Company.collection.update({ email }, { $set: { name, address, phone, interests, description, image, email, role } });
+    CompanyAddress.collection.remove({ name: email });
+    CompanyInterest.collection.remove({ name: email });
+    interests.map(interest => CompanyInterest.collection.insert({ name: email, interest }));
+    address.map(addresses => CompanyAddress.collection.insert({ name: email, addresses }));
+  },
+});
 
 const defaultStudent = { name: 'Enter name here',
   address: 'Enter address here',
@@ -46,4 +59,4 @@ Meteor.methods({
   },
 });
 
-export { addRoleMethod, newAccount };
+export { addRoleMethod, newAccount, updateCompanyMethod };

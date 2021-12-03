@@ -1,24 +1,44 @@
 import React from 'react';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import SimpleSchema from 'simpl-schema';
+import { _ } from 'meteor/underscore';
+import { Grid, Loader, Header, Segment, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Company } from '../../api/company/Company';
+import { updateCompanyMethod } from '../../startup/both/Methods';
+import { Interests } from '../../api/interests/Interests';
+import { Address } from '../../api/address/Address';
+import { CompanyInterest } from '../../api/company/CompanyInterest';
+import { CompanyAddress } from '../../api/company/CompanyAddress';
 
-const bridge = new SimpleSchema2Bridge(Company.schema);
+const makeSchema = (allInterests, allAddresses) => new SimpleSchema({
+  name: { type: String, label: 'Name', optional: true },
+  phone: { type: String, label: 'Contact', optional: true },
+  description: { type: String, label: 'Description', optional: true },
+  image: { type: String, label: 'Image URL', optional: true },
+  email: { type: String, label: 'Email', optional: true },
+  interests: { type: Array, label: 'Interests', optional: true },
+  'interests.$': { type: String, allowedValues: allInterests },
+  address: { type: Array, label: 'Address', optional: true },
+  'address.$': { type: String, allowedValues: allAddresses },
+});
 
 /** Renders the Page for editing a single document. */
 class EditCompanyProfile extends React.Component {
 
-  // On successful submit, insert the data.
   submit(data) {
-    const { name, address, phone, description, image, owner, _id } = data;
-    Company.collection.update(_id, { $set: { name, address, phone, description, image, owner } }, (error) => (error ?
-      swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
+    Meteor.call(updateCompanyMethod, data, (error) => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Profile updated successfully', 'success');
+      }
+    });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -28,20 +48,36 @@ class EditCompanyProfile extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
+    const email = Meteor.user().username;
+    // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
+    const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
+    const allAddresses = _.pluck(Address.collection.find().fetch(), 'name');
+    const formSchema = makeSchema(allInterests, allAddresses);
+    const bridge = new SimpleSchema2Bridge(formSchema);
+    // Now create the model with all the user information.
+    const interests = _.pluck(CompanyInterest.collection.find({ name: email }).fetch(), 'interest');
+    const addresses = _.pluck(CompanyAddress.collection.find({ name: email }).fetch(), 'addresses');
+    const company = Company.collection.findOne({ email });
+    const model = _.extend({}, company, { interests, addresses });
     return (
       <Grid container centered id="edit-company-profile-page">
         <Grid.Column>
           <Header as="h2" textAlign="center">Edit Company Profile</Header>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
+          <AutoForm model={model} schema={bridge} onSubmit={data => this.submit(data)}>
             <Segment>
-              <TextField name='name'/>
-              <TextField name='address'/>
-              <TextField name='phone'/>
-              <TextField name='description'/>
-              <TextField name='image'/>
-              <SubmitField value='Submit'/>
-              <ErrorsField/>
-              <HiddenField name='owner' />
+              <Form.Group widths={'equal'}>
+                <TextField id='name' name='name' showInlineError={true} placeholder={'Name'}/>
+                <TextField name='email' showInlineError={true} placeholder={'email'} disabled/>
+              </Form.Group>
+              <LongTextField id='description' name='description' placeholder='Description'/>
+              <Form.Group widths={'equal'}>
+                <TextField name='image' showInlineError={true} placeholder={'URL to image'}/>
+              </Form.Group>
+              <Form.Group widths={'equal'}>
+                <MultiSelectField name='interests' showInlineError={true} placeholder={'Interests'}/>
+                <MultiSelectField name='address' showInlineError={true} placeholder={'Address'}/>
+              </Form.Group>
+              <SubmitField id='home-page-submit' value='Update'/>
             </Segment>
           </AutoForm>
         </Grid.Column>
@@ -58,17 +94,15 @@ EditCompanyProfile.propTypes = {
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(({ match }) => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const documentId = match.params._id;
-  // Get access to Stuff documents.
+export default withTracker(() => {
   const subscription = Meteor.subscribe(Company.userPublicationName);
+  const subscription2 = Meteor.subscribe(CompanyAddress.userPublicationName);
+  const subscription3 = Meteor.subscribe(CompanyInterest.userPublicationName);
+  const subscription4 = Meteor.subscribe(Address.userPublicationName);
+  const subscription6 = Meteor.subscribe(Interests.userPublicationName);
   // Determine if the subscription is ready
-  const ready = subscription.ready();
-  // Get the document
-  const doc = Company.collection.findOne(documentId);
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();
   return {
-    doc,
     ready,
   };
 })(EditCompanyProfile);
