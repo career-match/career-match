@@ -59,18 +59,14 @@ class CompanyProfile extends React.Component {
     return (
       <Container id="find-students-page">
         <Header as="h2" textAlign="center"> List of Companies</Header>
+        <div className='ui fluid buttons'>
+          <Button size='large' basic color="green">
+            <Link to={`/edit-company-profile/${companyEmails._id}`}>Edit</Link>
+          </Button>
+        </div>
         <Card.Group centered>
           {_.map(companyProfiles, (company, index) => <MakeCard key={index} company={company}/>)}
         </Card.Group>
-        {/** Display the Edit link only if logged in as admin */
-          Roles.userIsInRole(Meteor.userId(), 'admin') ||
-          Roles.userIsInRole(Meteor.userId(), 'recruiter') ?
-            (<div className='ui fluid buttons'>
-              <Button basic color='black'>
-                <Link to={`/edit-company-profile/${companyEmails._id}`}>Edit</Link>
-              </Button>
-            </div>) : ''
-        }
       </Container>
     );
   }

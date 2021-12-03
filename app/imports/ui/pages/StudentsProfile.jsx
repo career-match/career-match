@@ -60,18 +60,14 @@ class StudentsProfile extends React.Component {
     return (
       <Container id="find-students-page">
         <Header as="h2" textAlign="center"> List of Students</Header>
+        <div className='ui fluid buttons'>
+          <Button size='large' basic color="green">
+            <Link to={`/edit-student-profile/${studentEmails._id}`}>Edit</Link>
+          </Button>
+        </div>
         <Card.Group centered>
           {_.map(studentProfiles, (student, index) => <MakeCard key={index} student={student}/>)}
         </Card.Group>
-        {/** Display the Edit link only if logged in as admin */
-          Roles.userIsInRole(Meteor.userId(), 'admin') ||
-          Roles.userIsInRole(Meteor.userId(), 'student') ?
-            (<div className='ui fluid buttons'>
-              <Button basic color='black'>
-                <Link to={`/edit-student-profile/${studentProfiles._id}`}>Edit</Link>
-              </Button>
-            </div>) : ''
-        }
       </Container>
     );
   }
