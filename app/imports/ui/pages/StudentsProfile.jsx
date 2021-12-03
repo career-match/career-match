@@ -5,17 +5,16 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Link } from 'react-router-dom';
-import { Roles } from 'meteor/alanning:roles';
 import { Student } from '../../api/student/Student';
 import { StudentInterest } from '../../api/student/StudentInterest';
 import { StudentAddress } from '../../api/student/StudentAddress';
-import { Address } from '../../api/address/Address';
+import { Addresses } from '../../api/address/Addresses';
 import { Interests } from '../../api/interests/Interests';
 
 function getStudentData(email) {
   const data = Student.collection.findOne({ email });
   const interests = _.pluck(StudentInterest.collection.find({ name: email }).fetch(), 'interest');
-  const addresses = _.pluck(StudentAddress.collection.find({ name: email }).fetch(), 'addresses');
+  const addresses = _.pluck(StudentAddress.collection.find({ name: email }).fetch(), 'address');
   return _.extend({}, data, { interests, addresses });
 }
 
@@ -56,13 +55,12 @@ class StudentsProfile extends React.Component {
   renderPage() {
     const studentEmails = _.pluck(Student.collection.find().fetch(), 'email');
     const studentProfiles = studentEmails.map(name => getStudentData(name));
-    console.log(studentProfiles);
     return (
       <Container id="find-students-page">
         <Header as="h2" textAlign="center"> List of Students</Header>
         <div className='ui fluid buttons'>
           <Button size='large' basic color="green">
-            <Link to={`/edit-student-profile/${studentEmails._id}`}>Edit</Link>
+            <Link to={`/edit-student-profile/${studentEmails._id}`}>Edit Your Profile</Link>
           </Button>
         </div>
         <Card.Group centered>
@@ -85,7 +83,7 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe(Student.userPublicationName);
   const subscription2 = Meteor.subscribe(StudentAddress.userPublicationName);
   const subscription3 = Meteor.subscribe(StudentInterest.userPublicationName);
-  const subscription4 = Meteor.subscribe(Address.userPublicationName);
+  const subscription4 = Meteor.subscribe(Addresses.userPublicationName);
   const subscription6 = Meteor.subscribe(Interests.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();

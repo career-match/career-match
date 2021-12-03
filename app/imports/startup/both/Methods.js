@@ -13,37 +13,37 @@ const updateCompanyMethod = 'Company.update';
 const updateStudentMethod = 'Student.update';
 
 Meteor.methods({
-  'Company.update'({ name, address, phone, interests, description, image, role, email }) {
-    Company.collection.update({ email }, { $set: { name, address, phone, interests, description, image, email, role } });
+  'Company.update'({ name, addresses, phone, interests, description, image, role, email }) {
+    Company.collection.update({ email }, { $set: { name, addresses, phone, interests, description, image, email, role } });
     CompanyAddress.collection.remove({ name: email });
     CompanyInterest.collection.remove({ name: email });
     interests.map(interest => CompanyInterest.collection.insert({ name: email, interest }));
-    address.map(addresses => CompanyAddress.collection.insert({ name: email, addresses }));
+    addresses.map(address => CompanyAddress.collection.insert({ name: email, address }));
   },
 });
 
 Meteor.methods({
-  'Student.update'({ name, address, phone, interests, description, image, role, email }) {
-    Student.collection.update({ email }, { $set: { name, address, phone, interests, description, image, email, role } });
+  'Student.update'({ name, addresses, phone, interests, description, image, role, email }) {
+    Student.collection.update({ email }, { $set: { name, addresses, phone, interests, description, image, email, role } });
     StudentAddress.collection.remove({ name: email });
     StudentInterest.collection.remove({ name: email });
     interests.map(interest => StudentInterest.collection.insert({ name: email, interest }));
-    address.map(addresses => StudentAddress.collection.insert({ name: email, addresses }));
+    addresses.map(address => StudentAddress.collection.insert({ name: email, address }));
   },
 });
 
 const defaultStudent = { name: 'Enter name here',
-  address: 'Enter address here',
   phone: 'Enter phone number here',
   description: 'Describe yourself here',
   image: 'Add a link to an image of you here',
+  address: '',
   owner: '',
   interest: '' };
 const defaultCompany = { name: 'Enter name here',
-  address: 'Enter address here',
   phone: 'Enter phone number here',
   description: 'Describe your company here',
   image: 'Add a link to your company logo here',
+  address: '',
   owner: '',
   interest: '' };
 

@@ -4,12 +4,12 @@ import { Student } from '../../api/student/Student';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { Interests } from '../../api/interests/Interests';
-import { Address } from '../../api/address/Address';
+import { Addresses } from '../../api/address/Addresses';
 import { StudentAddress } from '../../api/student/StudentAddress';
 import { StudentInterest } from '../../api/student/StudentInterest';
 
 Meteor.publish(Interests.userPublicationName, () => Interests.collection.find());
-Meteor.publish(Address.userPublicationName, () => Address.collection.find());
+Meteor.publish(Addresses.userPublicationName, () => Addresses.collection.find());
 Meteor.publish(CompanyAddress.userPublicationName, () => CompanyAddress.collection.find());
 Meteor.publish(CompanyInterest.userPublicationName, () => CompanyInterest.collection.find());
 Meteor.publish(StudentAddress.userPublicationName, () => StudentAddress.collection.find());

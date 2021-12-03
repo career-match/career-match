@@ -10,7 +10,7 @@ import { _ } from 'meteor/underscore';
 import { Company } from '../../api/company/Company';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
-import { Address } from '../../api/address/Address';
+import { Addresses } from '../../api/address/Addresses';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Interests } from '../../api/interests/Interests';
 import { Student } from '../../api/student/Student';
@@ -24,7 +24,7 @@ const makeSchema = (allInterests) => new SimpleSchema({
 function getCompanyData(email) {
   const data = Company.collection.findOne({ email });
   const interests = _.pluck(CompanyInterest.collection.find({ name: email }).fetch(), 'interest');
-  const addresses = _.pluck(CompanyAddress.collection.find({ name: email }).fetch(), 'addresses');
+  const addresses = _.pluck(CompanyAddress.collection.find({ name: email }).fetch(), 'address');
   return _.extend({}, data, { interests, addresses });
 }
 
@@ -114,7 +114,7 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe(Company.userPublicationName);
   const subscription2 = Meteor.subscribe(CompanyAddress.userPublicationName);
   const subscription3 = Meteor.subscribe(CompanyInterest.userPublicationName);
-  const subscription4 = Meteor.subscribe(Address.userPublicationName);
+  const subscription4 = Meteor.subscribe(Addresses.userPublicationName);
   const subscription5 = Meteor.subscribe(Student.userPublicationName);
   const subscription6 = Meteor.subscribe(Interests.userPublicationName);
   // Determine if the subscription is ready

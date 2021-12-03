@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { Interests } from '../../api/interests/Interests';
-import { Address } from '../../api/address/Address';
+import { Addresses } from '../../api/address/Addresses';
 import { Company } from '../../api/company/Company';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
@@ -35,11 +35,11 @@ function addInterest(interests) {
 
 /** Define an interest.  Has no effect if interest already exists. */
 function addAddress(addresses) {
-  Address.collection.update({ name: addresses }, { $set: { name: addresses } }, { upsert: true });
+  Addresses.collection.update({ name: addresses }, { $set: { name: addresses } }, { upsert: true });
 }
 
 /** Defines a new user and associated profile. Error if user already exists. */
-function addCompany({ name, address, phone, interests, description, image, role, email }) {
+function addCompany({ name, addresses, phone, interests, description, image, role, email }) {
   console.log(`Defining company ${name}`);
   createUser(email, role);
   // Define the user in the Meteor accounts package.
@@ -47,15 +47,14 @@ function addCompany({ name, address, phone, interests, description, image, role,
   Company.collection.insert({ name, phone, description, image, email, role });
   // Add interests and projects.
   interests.map(interest => CompanyInterest.collection.insert({ name: email, interest }));
-  address.map(addresses => CompanyAddress.collection.insert({ name: email, addresses }));
+  addresses.map(address => CompanyAddress.collection.insert({ name: email, address }));
   // Make sure interests are defined in the Interests collection if they weren't already.
-  console.log(address);
   interests.map(interest => addInterest(interest));
-  address.map(addresses => addAddress(addresses));
+  addresses.map(address => addAddress(address));
 }
 
 /** Defines a new user and associated profile. Error if user already exists. */
-function addStudent({ name, address, phone, interests, description, image, role, email }) {
+function addStudent({ name, addresses, phone, interests, description, image, role, email }) {
   console.log(`Defining student ${email}`);
   createUser(email, role);
   // Define the user in the Meteor accounts package.
@@ -63,10 +62,10 @@ function addStudent({ name, address, phone, interests, description, image, role,
   Student.collection.insert({ name, phone, description, image, email, role });
   // Add interests and projects.
   interests.map(interest => StudentInterest.collection.insert({ name: email, interest }));
-  address.map(addresses => StudentAddress.collection.insert({ name: email, addresses }));
+  addresses.map(address => StudentAddress.collection.insert({ name: email, address }));
   // Make sure interests are defined in the Interests collection if they weren't already.
   interests.map(interest => addInterest(interest));
-  address.map(addresses => addAddress(addresses));
+  addresses.map(address => addAddress(address));
 }
 
 /** Initialize DB if it appears to be empty (i.e. no users defined.) */

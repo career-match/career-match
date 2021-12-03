@@ -5,17 +5,16 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Link } from 'react-router-dom';
-import { Roles } from 'meteor/alanning:roles';
 import { Company } from '../../api/company/Company';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
-import { Address } from '../../api/address/Address';
+import { Addresses } from '../../api/address/Addresses';
 import { Interests } from '../../api/interests/Interests';
 
 function getCompanyData(email) {
   const data = Company.collection.findOne({ email });
   const interests = _.pluck(CompanyInterest.collection.find({ name: email }).fetch(), 'interest');
-  const addresses = _.pluck(CompanyAddress.collection.find({ name: email }).fetch(), 'addresses');
+  const addresses = _.pluck(CompanyAddress.collection.find({ name: email }).fetch(), 'address');
   return _.extend({}, data, { interests, addresses });
 }
 
@@ -56,14 +55,14 @@ class CompanyProfile extends React.Component {
   renderPage() {
     const companyEmails = _.pluck(Company.collection.find().fetch(), 'email');
     const companyProfiles = companyEmails.map(name => getCompanyData(name));
-    //const email = Meteor.user().username;
-    //const profileData = getCompanyData(email);
+    const email = Meteor.user().username;
+    const profileData = getCompanyData(email);
     return (
       <Container id="find-students-page">
         <Header as="h2" textAlign="center"> List of Companies</Header>
         <div className='ui fluid buttons'>
           <Button size='large' basic color="green">
-            <Link to={`/edit-company-profile/${companyEmails._id}`}>Edit</Link>
+            <Link to={`/edit-company-profile/${companyEmails._id}`}>Edit Your Profile</Link>
           </Button>
         </div>
         <Card.Group centered>
@@ -86,7 +85,7 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe(Company.userPublicationName);
   const subscription2 = Meteor.subscribe(CompanyAddress.userPublicationName);
   const subscription3 = Meteor.subscribe(CompanyInterest.userPublicationName);
-  const subscription4 = Meteor.subscribe(Address.userPublicationName);
+  const subscription4 = Meteor.subscribe(Addresses.userPublicationName);
   const subscription6 = Meteor.subscribe(Interests.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();

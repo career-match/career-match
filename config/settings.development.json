@@ -8,7 +8,7 @@
   "defaultCompany": [
     {
       "name": "Apple",
-      "address": [
+      "addresses": [
         "CA",
         "USA"
       ],
@@ -24,7 +24,7 @@
     },
     {
       "name": "Intel",
-      "address": [
+      "addresses": [
         "CA",
         "USA"
       ],
@@ -42,7 +42,7 @@
   "defaultStudent": [
     {
       "name": "John Doe",
-      "address": [
+      "addresses": [
         "HI",
         "USA"
       ],
@@ -58,7 +58,7 @@
     },
     {
       "name": "Jo Kim",
-      "address": [
+      "addresses": [
         "HI",
         "USA"
       ],

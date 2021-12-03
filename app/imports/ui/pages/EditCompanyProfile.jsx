@@ -12,7 +12,7 @@ import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Company } from '../../api/company/Company';
 import { updateCompanyMethod } from '../../startup/both/Methods';
 import { Interests } from '../../api/interests/Interests';
-import { Address } from '../../api/address/Address';
+import { Addresses } from '../../api/address/Addresses';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
 
@@ -24,8 +24,8 @@ const makeSchema = (allInterests, allAddresses) => new SimpleSchema({
   email: { type: String, label: 'Email', optional: true },
   interests: { type: Array, label: 'Interests', optional: true },
   'interests.$': { type: String, allowedValues: allInterests },
-  address: { type: Array, label: 'Address', optional: true },
-  'address.$': { type: String, allowedValues: allAddresses },
+  addresses: { type: Array, label: 'Address', optional: true },
+  'addresses.$': { type: String, allowedValues: allAddresses },
 });
 
 /** Renders the Page for editing a single document. */
@@ -51,12 +51,12 @@ class EditCompanyProfile extends React.Component {
     const email = Meteor.user().username;
     // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
     const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
-    const allAddresses = _.pluck(Address.collection.find().fetch(), 'name');
+    const allAddresses = _.pluck(Addresses.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allInterests, allAddresses);
     const bridge = new SimpleSchema2Bridge(formSchema);
     // Now create the model with all the user information.
     const interests = _.pluck(CompanyInterest.collection.find({ name: email }).fetch(), 'interest');
-    const addresses = _.pluck(CompanyAddress.collection.find({ name: email }).fetch(), 'addresses');
+    const addresses = _.pluck(CompanyAddress.collection.find({ name: email }).fetch(), 'address');
     const company = Company.collection.findOne({ email });
     const model = _.extend({}, company, { interests, addresses });
     return (
@@ -75,7 +75,7 @@ class EditCompanyProfile extends React.Component {
               </Form.Group>
               <Form.Group widths={'equal'}>
                 <MultiSelectField name='interests' showInlineError={true} placeholder={'Interests'}/>
-                <MultiSelectField name='address' showInlineError={true} placeholder={'Address'}/>
+                <MultiSelectField name='addresses' showInlineError={true} placeholder={'Addresses'}/>
               </Form.Group>
               <SubmitField id='home-page-submit' value='Update'/>
             </Segment>
@@ -98,7 +98,7 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe(Company.userPublicationName);
   const subscription2 = Meteor.subscribe(CompanyAddress.userPublicationName);
   const subscription3 = Meteor.subscribe(CompanyInterest.userPublicationName);
-  const subscription4 = Meteor.subscribe(Address.userPublicationName);
+  const subscription4 = Meteor.subscribe(Addresses.userPublicationName);
   const subscription6 = Meteor.subscribe(Interests.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();
