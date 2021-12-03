@@ -12,7 +12,7 @@ import { StudentAddress } from '../../api/student/StudentAddress';
 import { Address } from '../../api/address/Address';
 import { Interests } from '../../api/interests/Interests';
 
-function getCompanyData(email) {
+function getStudentData(email) {
   const data = Student.collection.findOne({ email });
   const interests = _.pluck(StudentInterest.collection.find({ name: email }).fetch(), 'interest');
   const addresses = _.pluck(StudentAddress.collection.find({ name: email }).fetch(), 'addresses');
@@ -30,6 +30,7 @@ const MakeCard = (props) => (
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
+      <Header as='h5'>Interests</Header>
       {_.map(props.student.interests,
         (interest, index) => <Label key={index} size='tiny'>{interest}</Label>)}
     </Card.Content>
@@ -53,23 +54,21 @@ class StudentsProfile extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const email = Meteor.user().username;
-    // const profileData = Profiles.collection.findOne({ email });
-    const profileData = getCompanyData(email);
+    const studentEmails = _.pluck(Student.collection.find().fetch(), 'email');
+    const studentProfiles = studentEmails.map(name => getStudentData(name));
+    console.log(studentProfiles);
     return (
       <Container id="find-students-page">
         <Header as="h2" textAlign="center"> List of Students</Header>
         <Card.Group centered>
-          {this.props.students.map((student, index) => <MakeCard
-            key={index}
-            student={student}/>)}
+          {_.map(studentProfiles, (student, index) => <MakeCard key={index} student={student}/>)}
         </Card.Group>
         {/** Display the Edit link only if logged in as admin */
           Roles.userIsInRole(Meteor.userId(), 'admin') ||
           Roles.userIsInRole(Meteor.userId(), 'student') ?
             (<div className='ui fluid buttons'>
               <Button basic color='black'>
-                <Link to={`/edit-student-profile/${profileData._id}`}>Edit</Link>
+                <Link to={`/edit-student-profile/${studentProfiles._id}`}>Edit</Link>
               </Button>
             </div>) : ''
         }

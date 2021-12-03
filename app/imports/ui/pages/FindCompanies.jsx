@@ -39,6 +39,7 @@ const MakeCard = (props) => (
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
+      <Header as='h5'>Interests</Header>
       {_.map(props.company.interests,
         (interest, index) => <Label key={index} size='tiny'>{interest}</Label>)}
     </Card.Content>
@@ -76,6 +77,8 @@ class FindCompanies extends React.Component {
     const bridge = new SimpleSchema2Bridge(formSchema);
     const interestNames = _.pluck(CompanyInterest.collection.find({ interest: { $in: this.state.interest } }).fetch(), 'name');
     const companyData = _.uniq(interestNames).map(name => getCompanyData(name));
+    const companyEmails = _.pluck(Company.collection.find().fetch(), 'email');
+    const companyProfiles = companyEmails.map(name => getCompanyData(name));
     return (
       <Container id="filter-page">
         <Header as="h2" textAlign="center">Find Companies</Header>
@@ -91,9 +94,7 @@ class FindCompanies extends React.Component {
         <Container id="find-students-page">
           <Header as="h2" textAlign="center"> List of Companies</Header>
           <Card.Group centered>
-            {this.props.companies.map((company, index) => <MakeCard
-              key={index}
-              company={company}/>)}
+            {_.map(companyProfiles, (company, index) => <MakeCard key={index} company={company}/>)}
           </Card.Group>
         </Container>
       </Container>
