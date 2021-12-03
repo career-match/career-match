@@ -4,10 +4,13 @@ import { Student } from '../../api/student/Student';
 import { Company } from '../../api/company/Company';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
 import { CompanyAddress } from '../../api/company/CompanyAddress';
+import { StudentInterest } from '../../api/student/StudentInterest';
+import { StudentAddress } from '../../api/student/StudentAddress';
 
 const addRoleMethod = 'Roles.add';
 const newAccount = 'Account.add';
 const updateCompanyMethod = 'Company.update';
+const updateStudentMethod = 'Student.update';
 
 Meteor.methods({
   'Company.update'({ name, address, phone, interests, description, image, role, email }) {
@@ -16,6 +19,16 @@ Meteor.methods({
     CompanyInterest.collection.remove({ name: email });
     interests.map(interest => CompanyInterest.collection.insert({ name: email, interest }));
     address.map(addresses => CompanyAddress.collection.insert({ name: email, addresses }));
+  },
+});
+
+Meteor.methods({
+  'Student.update'({ name, address, phone, interests, description, image, role, email }) {
+    Student.collection.update({ email }, { $set: { name, address, phone, interests, description, image, email, role } });
+    StudentAddress.collection.remove({ name: email });
+    StudentInterest.collection.remove({ name: email });
+    interests.map(interest => StudentInterest.collection.insert({ name: email, interest }));
+    address.map(addresses => StudentAddress.collection.insert({ name: email, addresses }));
   },
 });
 
@@ -59,4 +72,4 @@ Meteor.methods({
   },
 });
 
-export { addRoleMethod, newAccount, updateCompanyMethod };
+export { addRoleMethod, newAccount, updateCompanyMethod, updateStudentMethod };

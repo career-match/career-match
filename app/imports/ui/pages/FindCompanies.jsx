@@ -14,7 +14,6 @@ import { Address } from '../../api/address/Address';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Interests } from '../../api/interests/Interests';
 import { Student } from '../../api/student/Student';
-import CompanyItem from '../components/CompanyItem';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const makeSchema = (allInterests) => new SimpleSchema({
