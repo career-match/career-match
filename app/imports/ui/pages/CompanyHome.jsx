@@ -18,7 +18,8 @@ class CompanyHome extends React.Component {
           <h4>Create a profile where you can add your company&apos;s interests, skills, location, and a link to your portfolio for students to view.</h4>
         </Grid.Row>
         <Grid.Row>
-          <Button id='edit-company-profile-button' attached='bottom' as='a' href={`#/edit-company-profile/${Meteor.userId()}`}>Add/Edit Company</Button>
+          <Button id='add-company-profile-button' attached='bottom' as='a' href='#/addcompany'>Create Company Profile</Button>
+          <Button id='edit-company-profile-button' attached='bottom' as='a' href={`#/edit-company-profile/${Meteor.userId()}`}>Edit Company</Button>
         </Grid.Row>
         <Grid.Row>
           <h2>Explore Users</h2>
