@@ -92,7 +92,7 @@ class FindCompanies extends React.Component {
           {_.map(companyData, (company, index) => <MakeCard key={index} company={company}/>)}
         </Card.Group>
         <Container id="find-students-page">
-          <Header as="h2" textAlign="center"> List of Companies</Header>
+          <Header className="list-of-company-header" as="h2" textAlign="center"> List of Companies</Header>
           <Card.Group centered>
             {_.map(companyProfiles, (company, index) => <MakeCard key={index} company={company}/>)}
           </Card.Group>

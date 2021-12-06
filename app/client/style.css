@@ -13,3 +13,18 @@
   color: #00502F;
   padding-top: 20px;
 }
+
+.list-of-company-header {
+  padding-top: 40px !important;
+}
+
+.ui.two.buttons {
+  margin-top: 20px;
+  background-color: #00502F;
+}
+
+.edit.link {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}

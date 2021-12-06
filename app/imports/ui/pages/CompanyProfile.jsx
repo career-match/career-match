@@ -53,21 +53,20 @@ class CompanyProfile extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const companyEmails = _.pluck(Company.collection.find().fetch(), 'email');
-    const companyProfiles = companyEmails.map(name => getCompanyData(name));
     const email = Meteor.user().username;
     const profileData = getCompanyData(email);
     return (
-      <Container id="find-students-page">
-        <Header as="h2" textAlign="center"> List of Companies</Header>
-        <div className='ui fluid buttons'>
-          <Button size='large' basic color="green">
-            <Link to={`/edit-company-profile/${companyEmails._id}`}>Edit Your Profile</Link>
-          </Button>
-        </div>
-        <Card.Group centered>
-          {_.map(companyProfiles, (company, index) => <MakeCard key={index} company={company}/>)}
-        </Card.Group>
+      <Container id="company-page">
+        <Container id="company-profiles-page">
+          <Card.Group centered>
+            <div className='ui two buttons'>
+              <Button basic color='black'>
+                <Link className = 'edit link' to={`/edit-company-profile/${profileData._id}`}>Edit Your Company Profile</Link>
+              </Button>
+            </div>
+            <MakeCard company={profileData}/>
+          </Card.Group>
+        </Container>
       </Container>
     );
   }
@@ -75,7 +74,6 @@ class CompanyProfile extends React.Component {
 
 // Require an array of Stuff documents in the props.
 CompanyProfile.propTypes = {
-  companies: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -90,9 +88,7 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();
   // Get the Stuff documents
-  const companies = Company.collection.find({}).fetch();
   return {
-    companies,
     ready,
   };
 })(CompanyProfile);

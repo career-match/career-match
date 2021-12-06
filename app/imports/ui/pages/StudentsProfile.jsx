@@ -53,19 +53,20 @@ class StudentsProfile extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const studentEmails = _.pluck(Student.collection.find().fetch(), 'email');
-    const studentProfiles = studentEmails.map(name => getStudentData(name));
+    const email = Meteor.user().username;
+    const profileData = getStudentData(email);
     return (
-      <Container id="find-students-page">
-        <Header as="h2" textAlign="center"> List of Students</Header>
-        <div className='ui fluid buttons'>
-          <Button size='large' basic color="green">
-            <Link to={`/edit-student-profile/${studentEmails._id}`}>Edit Your Profile</Link>
-          </Button>
-        </div>
-        <Card.Group centered>
-          {_.map(studentProfiles, (student, index) => <MakeCard key={index} student={student}/>)}
-        </Card.Group>
+      <Container id="student-page">
+        <Container id="student-profiles-page">
+          <Card.Group centered>
+            <div className='ui two buttons'>
+              <Button basic color='black'>
+                <Link className = 'edit link' to={`/edit-student-profile/${profileData._id}`}>Edit Your Student Profile</Link>
+              </Button>
+            </div>
+            <MakeCard student={profileData}/>
+          </Card.Group>
+        </Container>
       </Container>
     );
   }
@@ -73,7 +74,6 @@ class StudentsProfile extends React.Component {
 
 // Require an array of Stuff documents in the props.
 StudentsProfile.propTypes = {
-  students: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -87,10 +87,7 @@ export default withTracker(() => {
   const subscription6 = Meteor.subscribe(Interests.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();
-  // Get the Stuff documents
-  const students = Student.collection.find({}).fetch();
   return {
-    students,
     ready,
   };
 })(StudentsProfile);
