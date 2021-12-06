@@ -16,6 +16,56 @@
       "role": "recruiter"
     },
     {
+      "email": "google@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "microsoft@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "dell@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "hawaiianair@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "hawaiielectric@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "meta@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "amazon@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "netflix@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "adobe@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "ibm@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
       "email": "john@foo.com",
       "password": "changeme",
       "role": "student"
@@ -44,6 +94,96 @@
       "description": "We create world-changing technology that improves the life of every person on the planet. We are inspired to: Drive innovation that makes the world safer, builds healthy and vibrant communities, and increases productivity. We have big ambitions, and a growing sense of urgency to work with others and address world challenges no one can tackle alone.",
       "image": "https://images.idgesg.net/images/article/2019/01/intel-logo-100786098-large.jpg",
       "owner": "intel@foo.com"
+    },
+    {
+      "name": "Google",
+      "address": "Google Inc. 1600 Amphitheatre Pkwy. Mountain View, CA 94043",
+      "phone": "1-650-253-0000",
+      "condition": "python",
+      "description": "Our mission is to organize the world’s information and make it universally accessible and useful. We are committed to significantly improving the lives of as many people as possible. We are building a world where progress, equitable outcomes, diversity, and inclusion can be realities both inside and outside our workplace.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png",
+      "owner": "google@foo.com"
+    },
+    {
+      "name": "Microsoft",
+      "address": "Microsoft Corporation. One Microsoft Way. Redmond, WA 98052-7329",
+      "phone": "(425) 882-8080",
+      "condition": "design",
+      "description": "Microsoft enables digital transformation for the era of an intelligent cloud and an intelligent edge. Its mission is to empower every person and every organization on the planet to achieve more.",
+      "image": "https://purepng.com/public/uploads/large/purepng.com-microsoft-logo-iconlogobrand-logoiconslogos-251519939091wmudn.png",
+      "owner": "microsoft@foo.com"
+    },
+    {
+      "name": "Dell",
+      "address": "Dell Inc. 1 Dell Way, Round Rock, TX 78682",
+      "phone": "1-800-289-3355",
+      "condition": "ruby",
+      "description": "Our story began with a belief and a passion: that everybody should have easy access to the best technology anywhere in the world. We are among the world’s leading technology companies helping to transform people’s lives with extraordinary capabilities.",
+      "image": "https://www.headquartersinfo.com/images/logos/dell-logo.gif",
+      "owner": "dell@foo.com"
+    },
+    {
+      "name": "Hawaiian Airlines",
+      "address": "Hawaiian Airlines, P.O. Box 30008, Honolulu, HI 96820",
+      "phone": "1-800-367-5320",
+      "condition": "ui",
+      "description": "Hawaiian Airlines, Hawaii's largest and longest-serving airline, is looking for exceptional people. People with experience. People with ambition. People who love Hawaii.",
+      "image": "https://css.s-hawaiianairlines.com/Content/assets/images/logos/ha-logo-stacked.png",
+      "owner": "hawaiianair@foo.com"
+    },
+    {
+      "name": "Hawaiian Electric",
+      "address": "1001 Bishop Street, Honolulu, HI 96813",
+      "phone": "(808) 548-7311",
+      "condition": "ui",
+      "description": "Established in 1891, Hawaiian Electric is committed to empowering its customers and communities by providing affordable, reliable, clean and sustainable energy.",
+      "image": "https://www.udcus.com/sites/default/files/assets/client-logos/logo-hawaiian-electric.jpg",
+      "owner": "hawaiielectric@foo.com"
+    },
+    {
+      "name": "Meta",
+      "address": "Facebook 1 Hacker Way Menlo Park, CA 94025",
+      "phone": "(800) 555-5555",
+      "condition": "meteor",
+      "description": "The metaverse is the next evolution of social connection. Our company’s vision is to help bring the metaverse to life.",
+      "image": "https://cdn.statically.io/img/static1.srcdn.com/wordpress/wp-content/uploads/2021/10/meta-logo-facebook-new-name.jpg",
+      "owner": "meta@foo.com"
+    },
+    {
+      "name": "Amazon",
+      "address": "Amazon Headquarters 410 Terry Ave. N Seattle, WA 98109",
+      "phone": "(888) 280-3321",
+      "condition": "javascript",
+      "description": "Amazon strives to be Earth’s most customer-centric company, Earth’s best employer, and Earth’s safest place to work.",
+      "image": "https://images01.military.com/sites/default/files/2018-04/amazon-logo-1800.jpg",
+      "owner": "Amazon@foo.com"
+    },
+    {
+      "name": "Netflix",
+      "address": "100 Winchester Cir, Los Gatos, CA 95032, United States",
+      "phone": "1-844-505-2993",
+      "condition": "design",
+      "description": "At Netflix, we want to entertain the world.",
+      "image": "https://www.refinedguy.com/wp-content/uploads/2016/06/Netflix.jpg",
+      "owner": "netflix@foo.com"
+    },
+    {
+      "name": "Adobe",
+      "address": "Adobe 345 Park Avenue San Jose, CA 95110-2704",
+      "phone": "1-800-585-0774",
+      "condition": "design",
+      "description": "Creativity is in our DNA. Our game-changing innovations are redefining the possibilities of digital experiences. We connect content and data and introduce new technologies that democratize creativity, shape the next generation of storytelling, and inspire entirely new categories of business.",
+      "image": "http://logok.org/wp-content/uploads/2014/09/Adobe-logo.png",
+      "owner": "adobe@foo.com"
+    },
+    {
+      "name": "IBM",
+      "address": "1 New Orchard Road Armonk, NY 10504-1722 USA",
+      "phone": "1-914-499-1900",
+      "condition": "ruby",
+      "description": "We believe our strength lies in the diversity of our employees. IBM encourages creative pursuits and passions outside of work.",
+      "image": "https://www.franklinapprenticeships.com/wp-content/uploads/2020/10/IBM_logoR_blue60_RGB-scaled.jpg",
+      "owner": "ibm@foo.com"
     }
   ],
   "defaultStudent": [
