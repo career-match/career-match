@@ -62,6 +62,9 @@ class AddStudentProfile extends React.Component {
                 <TextField id='name' name='name' showInlineError={true} placeholder={'Name'}/>
                 <TextField name='email' showInlineError={true} placeholder={'email'}/>
               </Form.Group>
+              <Form.Group widths={'equal'}>
+                <TextField name='phone' showInlineError={true} placeholder={'Contact Number'}/>
+              </Form.Group>
               <LongTextField id='description' name='description' placeholder='Description'/>
               <Form.Group widths={'equal'}>
                 <TextField name='image' showInlineError={true} placeholder={'URL to image'}/>
