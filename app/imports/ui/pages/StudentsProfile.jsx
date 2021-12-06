@@ -30,7 +30,7 @@ const MakeCard = (props) => (
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
-      {props.student.description};
+      {props.student.description}
     </Card.Content>
     <Card.Content extra>
       <Header as='h5'>Interests</Header>

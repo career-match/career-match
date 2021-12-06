@@ -89,8 +89,8 @@ class Signup extends React.Component {
                   <Form.Radio
                     label='Company'
                     name='role'
-                    value='company'
-                    checked={this.state.value === 'company'}
+                    value='recruiter'
+                    checked={this.state.value === 'recruiter'}
                     onChange={this.handleChange2}
                   />
                 </Form.Group>

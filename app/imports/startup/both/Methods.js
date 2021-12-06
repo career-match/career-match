@@ -38,7 +38,7 @@ Meteor.methods({
       Roles.createRole(role, { unlessExists: true });
       Roles.addUsersToRoles([Meteor.userId()], 'student', null);
     }
-    if (role === 'company') {
+    if (role === 'recruiter') {
       Roles.createRole(role, { unlessExists: true });
       Roles.addUsersToRoles([Meteor.userId()], 'recruiter', null);
     }
