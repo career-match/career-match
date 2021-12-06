@@ -16,6 +16,56 @@
       "role": "recruiter"
     },
     {
+      "email": "google@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "microsoft@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "dell@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "hawaiianair@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "hawaiielectric@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "meta@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "amazon@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "netflix@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "adobe@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
+      "email": "ibm@foo.com",
+      "password": "changeme",
+      "role": "recruiter"
+    },
+    {
       "email": "john@foo.com",
       "password": "changeme",
       "role": "student"
@@ -79,7 +129,7 @@
       "condition": "ui",
       "description": "Hawaiian Airlines, Hawaii's largest and longest-serving airline, is looking for exceptional people. People with experience. People with ambition. People who love Hawaii.",
       "image": "https://css.s-hawaiianairlines.com/Content/assets/images/logos/ha-logo-stacked.png",
-      "owner": "hawaiiair@foo.com"
+      "owner": "hawaiianair@foo.com"
     },
     {
       "name": "Hawaiian Electric",
@@ -91,49 +141,49 @@
       "owner": "hawaiielectric@foo.com"
     },
     {
-      "name": "",
-      "address": "",
-      "phone": "",
-      "condition": "",
-      "description": "",
-      "image": "",
-      "owner": ""
+      "name": "Meta",
+      "address": "Facebook 1 Hacker Way Menlo Park, CA 94025",
+      "phone": "(800) 555-5555",
+      "condition": "meteor",
+      "description": "The metaverse is the next evolution of social connection. Our company’s vision is to help bring the metaverse to life.",
+      "image": "https://cdn.statically.io/img/static1.srcdn.com/wordpress/wp-content/uploads/2021/10/meta-logo-facebook-new-name.jpg",
+      "owner": "meta@foo.com"
     },
     {
-      "name": "",
-      "address": "",
-      "phone": "",
-      "condition": "",
-      "description": "",
-      "image": "",
-      "owner": ""
+      "name": "Amazon",
+      "address": "Amazon Headquarters 410 Terry Ave. N Seattle, WA 98109",
+      "phone": "(888) 280-3321",
+      "condition": "javascript",
+      "description": "Amazon strives to be Earth’s most customer-centric company, Earth’s best employer, and Earth’s safest place to work.",
+      "image": "https://images01.military.com/sites/default/files/2018-04/amazon-logo-1800.jpg",
+      "owner": "Amazon@foo.com"
     },
     {
-      "name": "",
-      "address": "",
-      "phone": "",
-      "condition": "",
-      "description": "",
-      "image": "",
-      "owner": ""
+      "name": "Netflix",
+      "address": "100 Winchester Cir, Los Gatos, CA 95032, United States",
+      "phone": "1-844-505-2993",
+      "condition": "design",
+      "description": "At Netflix, we want to entertain the world.",
+      "image": "https://www.refinedguy.com/wp-content/uploads/2016/06/Netflix.jpg",
+      "owner": "netflix@foo.com"
     },
     {
-      "name": "",
-      "address": "",
-      "phone": "",
-      "condition": "",
-      "description": "",
-      "image": "",
-      "owner": ""
+      "name": "Adobe",
+      "address": "Adobe 345 Park Avenue San Jose, CA 95110-2704",
+      "phone": "1-800-585-0774",
+      "condition": "design",
+      "description": "Creativity is in our DNA. Our game-changing innovations are redefining the possibilities of digital experiences. We connect content and data and introduce new technologies that democratize creativity, shape the next generation of storytelling, and inspire entirely new categories of business.",
+      "image": "http://logok.org/wp-content/uploads/2014/09/Adobe-logo.png",
+      "owner": "adobe@foo.com"
     },
     {
-      "name": "",
-      "address": "",
-      "phone": "",
-      "condition": "",
-      "description": "",
-      "image": "",
-      "owner": ""
+      "name": "IBM",
+      "address": "1 New Orchard Road Armonk, NY 10504-1722 USA",
+      "phone": "1-914-499-1900",
+      "condition": "ruby",
+      "description": "We believe our strength lies in the diversity of our employees. IBM encourages creative pursuits and passions outside of work.",
+      "image": "https://www.franklinapprenticeships.com/wp-content/uploads/2020/10/IBM_logoR_blue60_RGB-scaled.jpg",
+      "owner": "ibm@foo.com"
     }
   ],
   "defaultStudent": [
