@@ -28,3 +28,8 @@
   color: white;
   font-size: 20px;
 }
+
+.ui.card>.content.extra,
+.ui.cards>.card>.content.extra {
+  color: black;
+}

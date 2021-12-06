@@ -35,6 +35,10 @@ const MakeCard = (props) => (
       <Image floated='right' size='mini' src={props.company.image}/>
       <Card.Header>{props.company.name}</Card.Header>
       <Card.Description>
+        <Header as='h5'>Contact Number</Header>
+        {props.company.phone}
+      </Card.Description>
+      <Card.Description>
         {props.company.description}
       </Card.Description>
     </Card.Content>

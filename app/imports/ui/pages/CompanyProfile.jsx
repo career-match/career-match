@@ -25,8 +25,12 @@ const MakeCard = (props) => (
       <Image floated='right' size='mini' src={props.company.image}/>
       <Card.Header>{props.company.name}</Card.Header>
       <Card.Description>
-        {props.company.description}
+        <Header as='h5'>Contact Number</Header>
+        {props.company.phone}
       </Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      {props.company.description}
     </Card.Content>
     <Card.Content extra>
       <Header as='h5'>Interests</Header>
@@ -61,7 +65,7 @@ class CompanyProfile extends React.Component {
           <Card.Group centered>
             <div className='ui two buttons'>
               <Button basic color='black'>
-                <Link className = 'edit link' to={`/edit-company-profile/${profileData._id}`}>Edit Your Company Profile</Link>
+                <Link className='edit link' to={`/edit-company-profile/${profileData._id}`}>Edit Your Company Profile</Link>
               </Button>
             </div>
             <MakeCard company={profileData}/>
