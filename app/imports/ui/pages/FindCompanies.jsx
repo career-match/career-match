@@ -76,7 +76,8 @@ class FindCompanies extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const allInterests = _.pluck(CompanyInterest.collection.find().fetch(), 'interest');
+    const allInterestsofCompany = _.pluck(CompanyInterest.collection.find().fetch(), 'interest');
+    const allInterests = _.uniq(allInterestsofCompany);
     const formSchema = makeSchema(allInterests);
     const bridge = new SimpleSchema2Bridge(formSchema);
     const interestNames = _.pluck(CompanyInterest.collection.find({ interest: { $in: this.state.interest } }).fetch(), 'name');
