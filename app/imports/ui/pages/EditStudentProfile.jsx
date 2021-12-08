@@ -15,7 +15,6 @@ import { Addresses } from '../../api/address/Addresses';
 import { Student } from '../../api/student/Student';
 import { StudentAddress } from '../../api/student/StudentAddress';
 import { StudentInterest } from '../../api/student/StudentInterest';
-import { Company } from '../../api/company/Company';
 
 const makeSchema = (allInterests, allAddresses) => new SimpleSchema({
   name: { type: String, label: 'Name', optional: true },
