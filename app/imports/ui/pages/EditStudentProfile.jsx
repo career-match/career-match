@@ -66,7 +66,7 @@ class EditStudentProfile extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-    const email = Meteor.user().username;
+    const email = this.props.doc.email;
     // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
     const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
     const allAddresses = _.pluck(Addresses.collection.find().fetch(), 'name');

@@ -65,9 +65,8 @@ class EditCompanyProfile extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-    const email = Meteor.user().username;
+    const email = this.props.doc.email;
     // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
-    console.log(this.props.doc.email);
     const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
     const allAddresses = _.pluck(Addresses.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allInterests, allAddresses);
