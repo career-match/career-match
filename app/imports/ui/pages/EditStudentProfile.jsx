@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/underscore';
-import { Grid, Loader, Header, Segment, Form } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Form, Button, Confirm } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -15,6 +15,7 @@ import { Addresses } from '../../api/address/Addresses';
 import { Student } from '../../api/student/Student';
 import { StudentAddress } from '../../api/student/StudentAddress';
 import { StudentInterest } from '../../api/student/StudentInterest';
+import { Company } from '../../api/company/Company';
 
 const makeSchema = (allInterests, allAddresses) => new SimpleSchema({
   name: { type: String, label: 'Name', optional: true },
@@ -31,6 +32,12 @@ const makeSchema = (allInterests, allAddresses) => new SimpleSchema({
 /** Renders the Page for editing a single document. */
 class EditStudentProfile extends React.Component {
 
+  state = { open: false }
+
+  open = () => this.setState({ open: true })
+
+  close = () => this.setState({ open: false })
+
   submit(data) {
     Meteor.call(updateStudentMethod, data, (error) => {
       if (error) {
@@ -39,6 +46,17 @@ class EditStudentProfile extends React.Component {
         swal('Success', 'Profile updated successfully', 'success');
       }
     });
+  }
+
+  delete() {
+    Student.collection.remove(this.props.doc._id,
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Student deleted Successfully', 'success');
+        }
+      });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -81,6 +99,13 @@ class EditStudentProfile extends React.Component {
                 <MultiSelectField name='addresses' showInlineError={true} placeholder={'Address'}/>
               </Form.Group>
               <SubmitField id='home-page-submit' value='Update'/>
+              <Button type="button" basic icon='trash' color='red' floated='right' onClick={this.open}/>
+              <Confirm
+                open={this.state.open}
+                content='Do you want to delete your student profile?'
+                onCancel={this.close}
+                onConfirm={this.delete.bind(this)}
+              />
             </Segment>
           </AutoForm>
         </Grid.Column>
@@ -97,7 +122,9 @@ EditStudentProfile.propTypes = {
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(() => {
+export default withTracker(({ match }) => {
+  const documentId = match.params._id;
+  const doc = Student.collection.findOne(documentId);
   const subscription = Meteor.subscribe(Student.userPublicationName);
   const subscription2 = Meteor.subscribe(StudentAddress.userPublicationName);
   const subscription3 = Meteor.subscribe(StudentInterest.userPublicationName);
@@ -106,6 +133,7 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();
   return {
+    doc,
     ready,
   };
 })(EditStudentProfile);
