@@ -15,7 +15,7 @@ import { findStudentsPage } from './findstudents.page';
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const student = { username: 'john@foo.com', password: 'changeme' };
-const recruiter = { username: 'apple@foo.com', password: 'changeme' };
+const recruiter = { username: 'apple@apple.com', password: 'changeme' };
 const admin = { username: 'admin@foo.com', password: 'changeme' };
 
 fixture('career-match localhost test with default db')
