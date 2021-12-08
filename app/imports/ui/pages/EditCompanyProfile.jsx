@@ -2,7 +2,7 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/underscore';
-import { Grid, Loader, Header, Segment, Form } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Form, Button, Confirm } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
@@ -31,14 +31,31 @@ const makeSchema = (allInterests, allAddresses) => new SimpleSchema({
 /** Renders the Page for editing a single document. */
 class EditCompanyProfile extends React.Component {
 
+  state = { open: false }
+
+  open = () => this.setState({ open: true })
+
+  close = () => this.setState({ open: false })
+
   submit(data) {
     Meteor.call(updateCompanyMethod, data, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
-        swal('Success', 'Profile updated successfully', 'success');
+        swal('Success', 'Company updated successfully', 'success');
       }
     });
+  }
+
+  delete() {
+    Company.collection.remove(this.props.doc._id,
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Company Deleted Successfully', 'success');
+        }
+      });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -50,6 +67,7 @@ class EditCompanyProfile extends React.Component {
   renderPage() {
     const email = Meteor.user().username;
     // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
+    console.log(this.props.doc.email);
     const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
     const allAddresses = _.pluck(Addresses.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allInterests, allAddresses);
@@ -81,6 +99,13 @@ class EditCompanyProfile extends React.Component {
                 <MultiSelectField name='addresses' showInlineError={true} placeholder={'Addresses'}/>
               </Form.Group>
               <SubmitField id='home-page-submit' value='Update'/>
+              <Button type="button" basic icon='trash' color='red' floated='right' onClick={this.open}/>
+              <Confirm
+                open={this.state.open}
+                content='Do you want to delete your company profile?'
+                onCancel={this.close}
+                onConfirm={this.delete.bind(this)}
+              />
             </Segment>
           </AutoForm>
         </Grid.Column>
@@ -97,7 +122,9 @@ EditCompanyProfile.propTypes = {
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(() => {
+export default withTracker(({ match }) => {
+  const documentId = match.params._id;
+  const doc = Company.collection.findOne(documentId);
   const subscription = Meteor.subscribe(Company.userPublicationName);
   const subscription2 = Meteor.subscribe(CompanyAddress.userPublicationName);
   const subscription3 = Meteor.subscribe(CompanyInterest.userPublicationName);
@@ -106,6 +133,7 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();
   return {
+    doc,
     ready,
   };
 })(EditCompanyProfile);

@@ -16,15 +16,13 @@ class NavBar extends React.Component {
           <Header inverted as='h1'>Career Match</Header>
         </Menu.Item>
         {/** Display the Find Students link if logged in as a recruiter or admin */
-          Roles.userIsInRole(Meteor.userId(), 'student') ||
-          Roles.userIsInRole(Meteor.userId(), 'admin') ?
+          Roles.userIsInRole(Meteor.userId(), 'student') ?
             (<Menu.Item id="navbar-view-students-profile" as={NavLink} activeClassName="active" exact to="/view-students-profile">
               My Student Profile
             </Menu.Item>) : ''
         }
         {/** Display the Find Students link if logged in as a recruiter or admin */
-          Roles.userIsInRole(Meteor.userId(), 'recruiter') ||
-          Roles.userIsInRole(Meteor.userId(), 'admin') ?
+          Roles.userIsInRole(Meteor.userId(), 'recruiter') ?
             (<Menu.Item id="navbar-view-companies-profile" as={NavLink} activeClassName="active" exact to="/view-companies-profile">
               My Company Profile
             </Menu.Item>) : ''

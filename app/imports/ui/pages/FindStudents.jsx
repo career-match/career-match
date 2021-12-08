@@ -2,11 +2,13 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Meteor } from 'meteor/meteor';
-import { Container, Card, Header, Loader, Image, Label, Segment } from 'semantic-ui-react';
+import { Container, Card, Header, Loader, Image, Label, Segment, Button } from 'semantic-ui-react';
 import { AutoForm, SubmitField } from 'uniforms-semantic';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
+import { Roles } from 'meteor/alanning:roles';
+import { Link } from 'react-router-dom';
 import { StudentInterest } from '../../api/student/StudentInterest';
 import { StudentAddress } from '../../api/student/StudentAddress';
 import { Addresses } from '../../api/address/Addresses';
@@ -50,6 +52,16 @@ const MakeCard = (props) => (
       <Header as='h5'>Address</Header>
       {_.map(props.student.addresses, (addresses, index) => <Label key={index} size='tiny'>{addresses}</Label>)}
     </Card.Content>
+    {/** Display the Edit link only if logged in as admin */
+      Roles.userIsInRole(Meteor.userId(), 'admin') ?
+        (<Card.Content extra>
+          <div className='ui buttons'>
+            <Button basic color='black'>
+              <Link to={`/edit-student-profile/${props.student._id}`}>Edit</Link>
+            </Button>
+          </div>
+        </Card.Content>) : ''
+    }
   </Card>
 );
 
