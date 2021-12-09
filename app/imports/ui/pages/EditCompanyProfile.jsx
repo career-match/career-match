@@ -98,7 +98,7 @@ class EditCompanyProfile extends React.Component {
                 <MultiSelectField name='addresses' showInlineError={true} placeholder={'Addresses'}/>
               </Form.Group>
               <SubmitField id='home-page-submit' value='Update'/>
-              <Button type="button" basic icon='trash' color='red' floated='right' onClick={this.open}/>
+              <Button type="button" color='red' floated='right' onClick={this.open}>Delete Profile</Button>
               <Confirm
                 open={this.state.open}
                 content='Do you want to delete your company profile?'
