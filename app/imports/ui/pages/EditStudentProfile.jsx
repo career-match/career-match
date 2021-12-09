@@ -9,7 +9,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
-import { updateStudentMethod } from '../../startup/both/Methods';
+import { deleteStudentMethod, updateStudentMethod } from '../../startup/both/Methods';
 import { Interests } from '../../api/interests/Interests';
 import { Addresses } from '../../api/address/Addresses';
 import { Student } from '../../api/student/Student';
@@ -48,12 +48,12 @@ class EditStudentProfile extends React.Component {
   }
 
   delete() {
-    Student.collection.remove(this.props.doc._id,
+    Meteor.call(deleteStudentMethod, this.props.doc,
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Student deleted Successfully', 'success');
+          swal('Success', 'Student profile deleted successfully', 'success');
         }
       });
   }

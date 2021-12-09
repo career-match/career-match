@@ -10,7 +10,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
 import { Company } from '../../api/company/Company';
-import { updateCompanyMethod } from '../../startup/both/Methods';
+import { deleteCompanyMethod, updateCompanyMethod } from '../../startup/both/Methods';
 import { Interests } from '../../api/interests/Interests';
 import { Addresses } from '../../api/address/Addresses';
 import { CompanyInterest } from '../../api/company/CompanyInterest';
@@ -48,12 +48,12 @@ class EditCompanyProfile extends React.Component {
   }
 
   delete() {
-    Company.collection.remove(this.props.doc._id,
+    Meteor.call(deleteCompanyMethod, this.props.doc,
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Company Deleted Successfully', 'success');
+          swal('Success', 'Company profile deleted successfully', 'success');
         }
       });
   }

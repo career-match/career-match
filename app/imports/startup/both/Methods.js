@@ -71,4 +71,26 @@ Meteor.methods({
   },
 });
 
-export { addRoleMethod, updateCompanyMethod, updateStudentMethod, addCompanyMethod, addStudentMethod };
+const deleteCompanyMethod = 'Company.delete';
+
+/** Creates a new project in the Projects collection, and also updates ProfilesProjects and ProjectsInterests. */
+Meteor.methods({
+  'Company.delete'({ email }) {
+    Company.collection.remove({ email: email });
+    CompanyInterest.collection.remove({ name: email });
+    CompanyAddress.collection.remove({ name: email });
+  },
+});
+
+const deleteStudentMethod = 'Student.delete';
+
+/** Creates a new project in the Projects collection, and also updates ProfilesProjects and ProjectsInterests. */
+Meteor.methods({
+  'Student.delete'({ email }) {
+    Student.collection.remove({ email: email });
+    StudentInterest.collection.remove({ name: email });
+    StudentAddress.collection.remove({ name: email });
+  },
+});
+
+export { addRoleMethod, updateCompanyMethod, updateStudentMethod, addCompanyMethod, addStudentMethod, deleteCompanyMethod, deleteStudentMethod };
