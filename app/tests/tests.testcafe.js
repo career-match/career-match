@@ -39,9 +39,6 @@ test('Test pages accessible to student', async (testController) => {
   await findCompaniesPage.isDisplayed(testController);
   await navBar.gotoStudentProfilePage(testController);
   await navBar.gotoLandingPage(testController);
-  await studentHomePage.gotoEditProfilePage(testController);
-  await editStudentProfilePage.isDisplayed(testController);
-  await navBar.gotoLandingPage(testController);
   await studentHomePage.gotoFindCompaniesPage(testController);
 
   await navBar.logout(testController);
