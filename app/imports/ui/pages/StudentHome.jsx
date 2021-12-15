@@ -1,5 +1,4 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
 import { Button, Grid } from 'semantic-ui-react';
 
 /** A simple static component to render some text for the landing page. */
@@ -18,8 +17,9 @@ class Landing extends React.Component {
           <h4> Create a profile where you can add your interests, skills, location, and a link to your portfolio for companies to view.</h4>
         </Grid.Row>
         <Grid.Row>
-          <Button id='add-student-profile-button' attached='bottom' as='a' href='#/addstudent'>Create Student Profile</Button>
-          <Button id='edit-student-profile-button' attached='bottom' as='a' href={`#/edit-student-profile/${Meteor.userId()}`}>Edit Profile</Button>
+          <Button id="view-students-profile" attached='bottom' as='a' href='#/view-students-profile'>
+            My Student Profile
+          </Button>
         </Grid.Row>
         <Grid.Row>
           <h1>Browse Companies</h1>

@@ -17,7 +17,7 @@ class CompanyCollection {
       phone: { type: String, optional: true },
       description: { type: String, optional: true },
       image: { type: String, optional: true },
-      email: { type: String, optional: true },
+      email: { type: String },
       role: { type: String, optional: true },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

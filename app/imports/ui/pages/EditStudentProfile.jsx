@@ -2,14 +2,14 @@ import React from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/underscore';
-import { Grid, Loader, Header, Segment, Form, Button, Confirm } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
 import { AutoForm, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import MultiSelectField from '../forms/controllers/MultiSelectField';
-import { deleteStudentMethod, updateStudentMethod } from '../../startup/both/Methods';
+import { updateStudentMethod } from '../../startup/both/Methods';
 import { Interests } from '../../api/interests/Interests';
 import { Addresses } from '../../api/address/Addresses';
 import { Student } from '../../api/student/Student';
@@ -45,17 +45,6 @@ class EditStudentProfile extends React.Component {
         swal('Success', 'Profile updated successfully', 'success');
       }
     });
-  }
-
-  delete() {
-    Meteor.call(deleteStudentMethod, this.props.doc,
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Student profile deleted successfully', 'success');
-        }
-      });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -98,13 +87,6 @@ class EditStudentProfile extends React.Component {
                 <MultiSelectField name='addresses' showInlineError={true} placeholder={'Address'}/>
               </Form.Group>
               <SubmitField id='home-page-submit' value='Update'/>
-              <Button type="button" color='red' floated='right' onClick={this.open}>Delete Profile</Button>
-              <Confirm
-                open={this.state.open}
-                content='Do you want to delete your student profile?'
-                onCancel={this.close}
-                onConfirm={this.delete.bind(this)}
-              />
             </Segment>
           </AutoForm>
         </Grid.Column>
