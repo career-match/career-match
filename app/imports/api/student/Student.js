@@ -13,17 +13,12 @@ class StudentCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      name: String,
-      address: String,
-      phone: String,
-      description: String,
-      image: String,
-      owner: String,
-      interest: {
-        type: String,
-        allowedValues: ['css', 'design', 'html', 'ia', 'javascript', 'meteor', 'node', 'python', 'react', 'ruby', 'ui'],
-        defaultValue: 'css',
-      },
+      name: { type: String, index: true, unique: true },
+      phone: { type: String, optional: true },
+      description: { type: String, optional: true },
+      image: { type: String, optional: true },
+      email: { type: String, optional: true },
+      role: { type: String, optional: true },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

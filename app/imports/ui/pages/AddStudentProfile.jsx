@@ -1,17 +1,17 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'meteor/underscore';
-import { Grid, Loader, Header, Segment, Form, Button, Confirm } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
-import { Meteor } from 'meteor/meteor';
+import { AutoForm, LongTextField, SubmitField, TextField } from 'uniforms-semantic';
+import { Header, Loader, Form, Grid, Segment } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import MultiSelectField from '../forms/controllers/MultiSelectField';
-import { deleteStudentMethod, updateStudentMethod } from '../../startup/both/Methods';
-import { Interests } from '../../api/interests/Interests';
 import { Addresses } from '../../api/address/Addresses';
+import { Interests } from '../../api/interests/Interests';
+import MultiSelectField from '../forms/controllers/MultiSelectField';
+import { addStudentMethod } from '../../startup/both/Methods';
 import { Student } from '../../api/student/Student';
 import { StudentAddress } from '../../api/student/StudentAddress';
 import { StudentInterest } from '../../api/student/StudentInterest';
@@ -28,34 +28,16 @@ const makeSchema = (allInterests, allAddresses) => new SimpleSchema({
   'addresses.$': { type: String, allowedValues: allAddresses },
 });
 
-/** Renders the Page for editing a single document. */
-class EditStudentProfile extends React.Component {
+class AddStudentProfile extends React.Component {
 
-  state = { open: false }
-
-  open = () => this.setState({ open: true })
-
-  close = () => this.setState({ open: false })
-
-  submit(data) {
-    Meteor.call(updateStudentMethod, data, (error) => {
+  submit(data, formRef) {
+    Meteor.call(addStudentMethod, data, (error) => {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
-        swal('Success', 'Profile updated successfully', 'success');
+        swal('Success', 'Profile added successfully', 'success').then(() => formRef.reset());
       }
     });
-  }
-
-  delete() {
-    Meteor.call(deleteStudentMethod, this.props.doc,
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Student profile deleted successfully', 'success');
-        }
-      });
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -63,28 +45,22 @@ class EditStudentProfile extends React.Component {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
+  // Render the page once subscriptions have been received.
   renderPage() {
-    const email = this.props.doc.email;
-    // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
+    let fRef = null;
     const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
     const allAddresses = _.pluck(Addresses.collection.find().fetch(), 'name');
     const formSchema = makeSchema(allInterests, allAddresses);
     const bridge = new SimpleSchema2Bridge(formSchema);
-    // Now create the model with all the user information.
-    const interests = _.pluck(StudentInterest.collection.find({ name: email }).fetch(), 'interest');
-    const addresses = _.pluck(StudentAddress.collection.find({ name: email }).fetch(), 'address');
-    const company = Student.collection.findOne({ email });
-    const model = _.extend({}, company, { interests, addresses });
     return (
-      <Grid container centered id="edit-company-profile-page">
+      <Grid container centered id="add-student-profile-page">
         <Grid.Column>
-          <Header as="h2" textAlign="center">Edit Student Profile</Header>
-          <AutoForm model={model} schema={bridge} onSubmit={data => this.submit(data)}>
+          <Header as="h2" textAlign="center">Add Student Profile</Header>
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
               <Form.Group widths={'equal'}>
                 <TextField id='name' name='name' showInlineError={true} placeholder={'Name'}/>
-                <TextField name='email' showInlineError={true} placeholder={'email'} disabled/>
+                <TextField name='email' showInlineError={true} placeholder={'email'}/>
               </Form.Group>
               <Form.Group widths={'equal'}>
                 <TextField name='phone' showInlineError={true} placeholder={'Contact Number'}/>
@@ -95,16 +71,9 @@ class EditStudentProfile extends React.Component {
               </Form.Group>
               <Form.Group widths={'equal'}>
                 <MultiSelectField name='interests' showInlineError={true} placeholder={'Interests'}/>
-                <MultiSelectField name='addresses' showInlineError={true} placeholder={'Address'}/>
+                <MultiSelectField name='addresses' showInlineError={true} placeholder={'Addresses'}/>
               </Form.Group>
               <SubmitField id='home-page-submit' value='Update'/>
-              <Button type="button" color='red' floated='right' onClick={this.open}>Delete Profile</Button>
-              <Confirm
-                open={this.state.open}
-                content='Do you want to delete your student profile?'
-                onCancel={this.close}
-                onConfirm={this.delete.bind(this)}
-              />
             </Segment>
           </AutoForm>
         </Grid.Column>
@@ -113,17 +82,14 @@ class EditStudentProfile extends React.Component {
   }
 }
 
-// Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
-EditStudentProfile.propTypes = {
-  doc: PropTypes.object,
-  model: PropTypes.object,
+// Require an array of Stuff documents in the props.
+AddStudentProfile.propTypes = {
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(({ match }) => {
-  const documentId = match.params._id;
-  const doc = Student.collection.findOne(documentId);
+export default withTracker(() => {
+  // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Student.userPublicationName);
   const subscription2 = Meteor.subscribe(StudentAddress.userPublicationName);
   const subscription3 = Meteor.subscribe(StudentInterest.userPublicationName);
@@ -131,8 +97,10 @@ export default withTracker(({ match }) => {
   const subscription6 = Meteor.subscribe(Interests.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() && subscription6.ready();
+  // Get the Stuff documents
+  const students = Student.collection.find({}).fetch();
   return {
-    doc,
+    students,
     ready,
   };
-})(EditStudentProfile);
+})(AddStudentProfile);

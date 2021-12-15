@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
-import { addRoleMethod, newAccount } from '../../startup/both/Methods';
+import { addRoleMethod } from '../../startup/both/Methods';
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -35,7 +35,6 @@ class Signup extends React.Component {
         this.setState({ error: err.reason });
       } else {
         Meteor.call(addRoleMethod, this.state);
-        Meteor.call(newAccount, this.state);
         swal('You have registered successfully.');
         this.setState({ error: '', redirectToReferer: true });
       }
@@ -90,8 +89,8 @@ class Signup extends React.Component {
                   <Form.Radio
                     label='Company'
                     name='role'
-                    value='company'
-                    checked={this.state.value === 'company'}
+                    value='recruiter'
+                    checked={this.state.value === 'recruiter'}
                     onChange={this.handleChange2}
                   />
                 </Form.Group>

@@ -2,208 +2,397 @@
   "defaultAccounts": [
     {
       "email": "admin@foo.com",
-      "password": "changeme",
       "role": "admin"
-    },
-    {
-      "email": "apple@apple.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "intel@intel.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "google@gmail.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "microsoft@microsoft.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "dell@dell.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "hawaiianair@hawaiianairlines.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "hawaiielectric@hawaiielectric.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "meta@facebook.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "amazon@amazon.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "netflix@netflix.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "adobe@adobe.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "ibm@ibm.com",
-      "password": "changeme",
-      "role": "recruiter"
-    },
-    {
-      "email": "john@foo.com",
-      "password": "changeme",
-      "role": "student"
-    },
-    {
-      "email": "jo@foo.com",
-      "password": "changeme",
-      "role": "student"
     }
   ],
   "defaultCompany": [
     {
       "name": "Apple",
-      "address": "One Apple Park Way, Cupertino, CA 95014",
+      "addresses": [
+        "CA",
+        "USA"
+      ],
       "phone": "(800)692–7753",
-      "condition": "css",
+      "interests": [
+        "C++",
+        "Java"
+      ],
       "description": "Apple Inc. designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services. The Companies products\n              include iPhone, Mac, iPad, and Wearables, Home and Accessories. iPhone is the Companies line of smartphones based on its iOS operating system",
       "image": "https://yt3.ggpht.com/ytc/AKedOLQR6CdQxBvU0Ye8hUpCyMc6HMwoMivl_vad_YmjZg=s900-c-k-c0x00ffffff-no-rj",
-      "owner": "apple@apple.com"
+      "email": "apple@apple.com",
+      "role": "recruiter"
     },
     {
       "name": "Intel",
-      "address": "2200 Mission College Blvd., Santa Clara, CA",
+      "addresses": [
+        "CA",
+        "USA"
+      ],
       "phone": "(408)765-8080",
-      "condition": "design",
-      "description": "We create world-changing technology that improves the life of every person on the planet. We are inspired to: Drive innovation that makes the world safer, builds healthy and vibrant communities, and increases productivity. We have big ambitions, and a growing sense of urgency to work with others and address world challenges no one can tackle alone.",
+      "interests": [
+        "Python",
+        "JavaScript"
+      ],
+      "description": "We create world-changing technology that improves the life of every person on the planet. We are inspired to: Drive innovation that makes the world safer, builds healthy and vibrant communities, and increases productivity. We have big ambitions, and a growing sense of urgency to work with others and addresses world challenges no one can tackle alone.",
       "image": "https://images.idgesg.net/images/article/2019/01/intel-logo-100786098-large.jpg",
-      "owner": "intel@intel.com"
+      "email": "intel@intel.com",
+      "role": "recruiter"
     },
     {
       "name": "Google",
-      "address": "Google Inc. 1600 Amphitheatre Pkwy. Mountain View, CA 94043",
+      "addresses": [
+        "CA",
+        "USA"
+      ],
       "phone": "1-650-253-0000",
-      "condition": "python",
+      "interests": [
+        "Python",
+        "Android"
+      ],
       "description": "Our mission is to organize the world’s information and make it universally accessible and useful. We are committed to significantly improving the lives of as many people as possible. We are building a world where progress, equitable outcomes, diversity, and inclusion can be realities both inside and outside our workplace.",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png",
-      "owner": "google@gmail.com"
+      "email": "google@gmail.com",
+      "role": "recruiter"
     },
     {
       "name": "Microsoft",
-      "address": "Microsoft Corporation. One Microsoft Way. Redmond, WA 98052-7329",
-      "phone": "(425) 882-8080",
-      "condition": "design",
+      "addresses": [
+        "WA",
+        "USA"
+      ],
+      "phone": "(425)882-8080",
+      "interests": [
+        "UI Design",
+        "Ruby"
+      ],
       "description": "Microsoft enables digital transformation for the era of an intelligent cloud and an intelligent edge. Its mission is to empower every person and every organization on the planet to achieve more.",
       "image": "https://purepng.com/public/uploads/large/purepng.com-microsoft-logo-iconlogobrand-logoiconslogos-251519939091wmudn.png",
-      "owner": "microsoft@microsoft.com"
+      "email": "microsoft@microsoft.com",
+      "role": "recruiter"
     },
     {
       "name": "Dell",
-      "address": "Dell Inc. 1 Dell Way, Round Rock, TX 78682",
+      "addresses": [
+        "TX",
+        "USA"
+      ],
       "phone": "1-800-289-3355",
-      "condition": "ruby",
+      "interests": [
+        "Ruby",
+        "Design"
+      ],
       "description": "Our story began with a belief and a passion: that everybody should have easy access to the best technology anywhere in the world. We are among the world’s leading technology companies helping to transform people’s lives with extraordinary capabilities.",
       "image": "https://www.headquartersinfo.com/images/logos/dell-logo.gif",
-      "owner": "dell@dell.com"
+      "email": "dell@dell.com",
+      "role": "recruiter"
     },
     {
       "name": "Hawaiian Airlines",
-      "address": "Hawaiian Airlines, P.O. Box 30008, Honolulu, HI 96820",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
       "phone": "1-800-367-5320",
-      "condition": "ui",
+      "interests": [
+        "UI Design",
+        "C++"
+      ],
       "description": "Hawaiian Airlines, Hawaii's largest and longest-serving airline, is looking for exceptional people. People with experience. People with ambition. People who love Hawaii.",
       "image": "https://css.s-hawaiianairlines.com/Content/assets/images/logos/ha-logo-stacked.png",
-      "owner": "hawaiianair@hawaiianairlines.com"
+      "email": "hawaiianair@hawaiianairlines.com",
+      "role": "recruiter"
     },
     {
       "name": "Hawaiian Electric",
-      "address": "1001 Bishop Street, Honolulu, HI 96813",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
       "phone": "(808) 548-7311",
-      "condition": "ui",
+      "interests": [
+        "UI Design",
+        "Node JS",
+        "React"
+      ],
       "description": "Established in 1891, Hawaiian Electric is committed to empowering its customers and communities by providing affordable, reliable, clean and sustainable energy.",
       "image": "https://www.udcus.com/sites/default/files/assets/client-logos/logo-hawaiian-electric.jpg",
-      "owner": "hawaiielectric@hawaiielectric.com"
+      "email": "hawaiielectric@hawaiielectric.com",
+      "role": "recruiter"
     },
     {
       "name": "Meta",
-      "address": "Facebook 1 Hacker Way Menlo Park, CA 94025",
+      "addresses": [
+        "CA",
+        "USA"
+      ],
       "phone": "(800) 555-5555",
-      "condition": "meteor",
+      "interests": [
+        "Meteor",
+        "React"
+      ],
       "description": "The metaverse is the next evolution of social connection. Our company’s vision is to help bring the metaverse to life.",
       "image": "https://cdn.statically.io/img/static1.srcdn.com/wordpress/wp-content/uploads/2021/10/meta-logo-facebook-new-name.jpg",
-      "owner": "meta@facebook.com"
+      "email": "meta@facebook.com",
+      "role": "recruiter"
     },
     {
       "name": "Amazon",
-      "address": "Amazon Headquarters 410 Terry Ave. N Seattle, WA 98109",
+      "addresses": [
+        "WA",
+        "USA"
+      ],
       "phone": "(888) 280-3321",
-      "condition": "javascript",
+      "interests": [
+        "JavaScript",
+        "Java"
+      ],
       "description": "Amazon strives to be Earth’s most customer-centric company, Earth’s best employer, and Earth’s safest place to work.",
       "image": "https://images01.military.com/sites/default/files/2018-04/amazon-logo-1800.jpg",
-      "owner": "Amazon@amazon.com"
+      "email": "Amazon@amazon.com",
+      "role": "recruiter"
     },
     {
       "name": "Netflix",
-      "address": "100 Winchester Cir, Los Gatos, CA 95032, United States",
+      "addresses": [
+        "CA",
+        "USA"
+      ],
       "phone": "1-844-505-2993",
-      "condition": "design",
+      "interests": [
+        "UI Design",
+        "Ruby"
+      ],
       "description": "At Netflix, we want to entertain the world.",
       "image": "https://www.refinedguy.com/wp-content/uploads/2016/06/Netflix.jpg",
-      "owner": "netflix@netflix.com"
+      "email": "netflix@netflix.com",
+      "role": "recruiter"
     },
     {
       "name": "Adobe",
-      "address": "Adobe 345 Park Avenue San Jose, CA 95110-2704",
+      "addresses": [
+        "CA",
+        "USA"
+      ],
       "phone": "1-800-585-0774",
-      "condition": "design",
+      "interests": [
+        "Web Design",
+        "JavaScript"
+      ],
       "description": "Creativity is in our DNA. Our game-changing innovations are redefining the possibilities of digital experiences. We connect content and data and introduce new technologies that democratize creativity, shape the next generation of storytelling, and inspire entirely new categories of business.",
       "image": "http://logok.org/wp-content/uploads/2014/09/Adobe-logo.png",
-      "owner": "adobe@adobe.com"
+      "email": "adobe@adobe.com",
+      "role": "recruiter"
     },
     {
       "name": "IBM",
-      "address": "1 New Orchard Road Armonk, NY 10504-1722 USA",
+      "addresses": [
+        "NY",
+        "USA"
+      ],
       "phone": "1-914-499-1900",
-      "condition": "ruby",
+      "interests": [
+        "Ruby",
+        "Meteor"
+      ],
       "description": "We believe our strength lies in the diversity of our employees. IBM encourages creative pursuits and passions outside of work.",
       "image": "https://www.franklinapprenticeships.com/wp-content/uploads/2020/10/IBM_logoR_blue60_RGB-scaled.jpg",
-      "owner": "ibm@ibm.com"
+      "email": "ibm@ibm.com",
+      "role": "recruiter"
     }
   ],
   "defaultStudent": [
     {
-      "name": "John Doe",
-      "address": "2569 Dole St, Honolulu, HI 96822",
+      "name": "John Lee",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
       "phone": "(808)808-8080",
-      "description": "UH Manoa Student",
-      "interest": "css",
-      "image": "https://www.clipartmax.com/png/middle/427-4272664_intermediate-student-profile-logo.png",
-      "owner": "john@foo.com"
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "CSS",
+        "JavaScript"
+      ],
+      "image": "https://cdn.iconscout.com/icon/free/png-256/boy-avatar-4-1129037.png",
+      "email": "johnlee@hawaii.edu",
+      "role": "student"
     },
     {
-      "name": "Jo Kim",
-      "address": "2569 Dole St, Honolulu, HI 96822",
-      "phone": "(808)808-8080",
-      "description": "UH Manoa Student",
-      "interest": "ui",
-      "image": "https://www.clipartmax.com/png/middle/427-4272664_intermediate-student-profile-logo.png",
-      "owner": "jo@foo.com"
+      "name": "Joe Kim",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)823-4102",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "UI Design",
+        "Java"
+      ],
+      "image": "https://www.shareicon.net/data/512x512/2016/05/26/771188_man_512x512.png",
+      "email": "joekim@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "Kathy Kim",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)723-3315",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "Java",
+        "JavaScript",
+        "Meteor"
+      ],
+      "image": "https://toppng.com/uploads/preview/girl-flat-icon-11549760838cubn4qroau.png",
+      "email": "kathykim@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "Steve James",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)123-6745",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "Android",
+        "React",
+        "Meteor"
+      ],
+      "image": "https://icons-for-free.com/iconfiles/png/512/boy+character+man+school+boy+user+icon-1320085976501561317.png",
+      "email": "stevejames@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "Tim Gates",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)143-6125",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "Node JS",
+        "SQL"
+      ],
+      "image": "https://icon-library.com/images/boy-icon-png/boy-icon-png-10.jpg",
+      "email": "timgates@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "Richard Fox",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)509-0139",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "Swift",
+        "C++"
+      ],
+      "image": "https://cdn-icons-png.flaticon.com/512/186/186036.png",
+      "email": "richardfox@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "May Ho",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)239-5029",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "C",
+        "Java"
+      ],
+      "image": "https://cdn.pixabay.com/photo/2021/01/04/10/37/icon-5887113_1280.png",
+      "email": "mayho@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "Arthur Jones",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)777-5234",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "C",
+        "JavaScript"
+      ],
+      "image": "https://icons-for-free.com/iconfiles/png/512/boy+man+max+icon-1320085967580513624.png",
+      "email": "arthurjones@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "Brandon Morris",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)741-1183",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "C++",
+        "UI Design"
+      ],
+      "image": "https://cdn2.iconfinder.com/data/icons/avatars-2-7/128/16-512.png",
+      "email": "brandonmorris@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "Jinny Yu",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)412-1353",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "Node JS",
+        "UI Design"
+      ],
+      "image": "https://cdn-icons-png.flaticon.com/512/146/146025.png",
+      "email": "jinnyyu@hawaii.edu",
+      "role": "student"
+    },
+    {
+      "name": "Nathan Kamae",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)051-5110",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "Python",
+        "React"
+      ],
+      "image": "https://www.shareicon.net/data/2016/05/24/770117_people_512x512.png",
+      "email": "nathankamae@hawaii.edu",
+      "role": "student"
+    },    {
+      "name": "Caitlin Arne",
+      "addresses": [
+        "HI",
+        "USA"
+      ],
+      "phone": "(808)982-3123",
+      "description": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii.",
+      "interests": [
+        "Node JS",
+        "C++"
+      ],
+      "image": "https://cdn.pixabay.com/photo/2021/01/04/10/41/icon-5887126_960_720.png",
+      "email": "caitlinarne@hawaii.edu",
+      "role": "student"
     }
   ]
 }
