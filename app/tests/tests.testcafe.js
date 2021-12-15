@@ -8,14 +8,13 @@ import { adminHomePage } from './adminhome.page';
 import { signupPage } from './signup.page';
 import { findCompaniesPage } from './findcompanies.page';
 import { editStudentProfilePage } from './editstudentprofile.page';
-import { editCompanyProfilePage } from './editcompanyprofile.page';
 import { findStudentsPage } from './findstudents.page';
 
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const student = { username: 'john@foo.com', password: 'changeme' };
-const recruiter = { username: 'apple@foo.com', password: 'changeme' };
+const recruiter = { username: 'apple@apple.com', password: 'changeme' };
 const admin = { username: 'admin@foo.com', password: 'changeme' };
 
 fixture('career-match localhost test with default db')
@@ -36,9 +35,15 @@ test('Test pages accessible to student', async (testController) => {
   await navBar.isLoggedIn(testController, student.username);
 
   await studentHomePage.isDisplayed(testController);
-  await navBar.gotoEditProfilePage(testController);
-  await editStudentProfilePage.isDisplayed(testController);
   await navBar.gotoFindCompaniesPage(testController);
+  await findCompaniesPage.isDisplayed(testController);
+  await navBar.gotoStudentProfilePage(testController);
+  await findStudentsPage.isDisplayed(testController);
+  await navBar.gotoLandingPage(testController);
+  await studentHomePage.gotoEditProfilePage(testController);
+  await editStudentProfilePage.isDisplayed(testController);
+  await navBar.gotoLandingPage(testController);
+  await studentHomePage.gotoFindCompaniesPage(testController);
   await findCompaniesPage.isDisplayed(testController);
 
   await navBar.logout(testController);
@@ -51,8 +56,8 @@ test('Test pages accessible to recruiter', async (testController) => {
   await navBar.isLoggedIn(testController, recruiter.username);
 
   await companyHomePage.isDisplayed(testController);
-  await navBar.gotoEditProfilePage(testController);
-  await editCompanyProfilePage.isDisplayed(testController);
+  await navBar.gotoCompanyProfilePage(testController);
+  await findCompaniesPage.isDisplayed(testController);
   await navBar.gotoFindStudentsPage(testController);
   await findStudentsPage.isDisplayed(testController);
 
