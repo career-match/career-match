@@ -96,7 +96,7 @@ class FindStudents extends React.Component {
     const studentEmails = _.pluck(Student.collection.find().fetch(), 'email');
     const studentProfiles = studentEmails.map(name => getStudentData(name));
     return (
-      <Container id="filter-page">
+      <Container id="find-students-page">
         <Header as="h2" textAlign="center">Find Students</Header>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>

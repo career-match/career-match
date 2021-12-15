@@ -97,7 +97,7 @@ class FindCompanies extends React.Component {
     const companyEmails = _.pluck(Company.collection.find().fetch(), 'email');
     const companyProfiles = companyEmails.map(name => getCompanyData(name));
     return (
-      <Container id="filter-page">
+      <Container id="find-companies-page">
         <Header as="h2" textAlign="center">Find Companies</Header>
         <AutoForm schema={bridge} onSubmit={data => this.submit(data)}>
           <Segment>
