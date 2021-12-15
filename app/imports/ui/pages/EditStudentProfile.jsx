@@ -77,7 +77,7 @@ class EditStudentProfile extends React.Component {
     const company = Student.collection.findOne({ email });
     const model = _.extend({}, company, { interests, addresses });
     return (
-      <Grid container centered id="edit-company-profile-page">
+      <Grid container centered id="edit-student-profile-page">
         <Grid.Column>
           <Header as="h2" textAlign="center">Edit Student Profile</Header>
           <AutoForm model={model} schema={bridge} onSubmit={data => this.submit(data)}>
