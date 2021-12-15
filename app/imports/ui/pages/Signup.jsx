@@ -6,6 +6,8 @@ import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 import { addRoleMethod } from '../../startup/both/Methods';
+import { Company } from '../../api/company/Company';
+import { Student } from '../../api/student/Student';
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -14,7 +16,7 @@ class Signup extends React.Component {
   /* Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', role: '', error: '', redirectToReferer: false };
+    this.state = { name: '', email: '', password: '', role: '', error: '', redirectToReferer: false };
   }
 
   /* Update the form controls each time the user interacts with them. */
@@ -29,7 +31,7 @@ class Signup extends React.Component {
 
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
-    const { email, password, role } = this.state;
+    const { name, email, password, role } = this.state;
     Accounts.createUser({ email, username: email, password, role }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
@@ -39,6 +41,14 @@ class Signup extends React.Component {
         this.setState({ error: '', redirectToReferer: true });
       }
     });
+    // Create a profile in the appropriate collection
+    if (role === 'student') {
+      console.log('created empty student profile');
+      Student.collection.insert({ name, email, role });
+    } else if (role === 'recruiter') {
+      console.log('created empty company profile');
+      Company.collection.insert({ name, email, role });
+    }
   }
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
@@ -57,6 +67,16 @@ class Signup extends React.Component {
             </Header>
             <Form onSubmit={this.submit}>
               <Segment stacked>
+                <Form.Input
+                  label="Name"
+                  id="signup-form-name"
+                  icon="user"
+                  iconPosition="left"
+                  name="name"
+                  type="name"
+                  placeholder="Full Name"
+                  onChange={this.handleChange}
+                />
                 <Form.Input
                   label="Email"
                   id="signup-form-email"
@@ -87,7 +107,7 @@ class Signup extends React.Component {
                     onChange={this.handleChange2}
                   />
                   <Form.Radio
-                    label='Company'
+                    label='Recruiter'
                     name='role'
                     value='recruiter'
                     checked={this.state.value === 'recruiter'}
